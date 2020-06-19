@@ -1,1 +1,3 @@
 schedule
+colorama
+Adafruit_DHT

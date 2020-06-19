@@ -3,32 +3,42 @@ import subprocess
 import schedule
 
 import Configuration
+from colorama import Style, Fore
 
+FAN_ON = True
 
 def scheduleAuto():
-    schedule.every(30).seconds.do(autoControl())
+    schedule.every(30).seconds.do(autoControl)
+    print(Fore.LIGHTGREEN_EX + "[*] System Cooling scheduled." + Style.RESET_ALL)
 
 
 def turnON():
-    print("Turning on CPU Fan...")
+    FAN_ON = True
+    print(Fore.LIGHTMAGENTA_EX + "[+] Turning on CPU Fan..." + Style.RESET_ALL)
 
 
 def turnOFF():
-    print("Turning off CPU Fan...")
+    FAN_ON = False
+    print(Fore.MAGENTA + "[-] Turning off CPU Fan..." + Style.RESET_ALL)
 
 
 def getCPUTemp():
-    cpuTemp = 0.0
     try:
         p = subprocess.check_output(['vcgencmd', 'measure_temp'])
         cpuTemp = float(subprocess.check_output(['egrep', '-o', '[0-9]*\\.[0-9]*'], stdin=p))
     except Exception as e:
-        print(e)
+        cpuTemp = 0.0
+        print(Fore.RED + "[!] Error obtaining CPU Temp.")
+        print(str(e) + Style.RESET_ALL)
     return cpuTemp
 
 
 def autoControl():
-    if getCPUTemp() >= Configuration.MAX_CPU_TEMP:
-        turnON()
+    cpuTemp = getCPUTemp()
+    print(Fore.LIGHTBLUE_EX + "[i] CPU Temp = " + str(cpuTemp) + " ºC")
+    if cpuTemp >= Configuration.MAX_CPU_TEMP:
+        if not FAN_ON:
+            turnON()
     else:
-        turnOFF()
+        if FAN_ON:
+            turnOFF()

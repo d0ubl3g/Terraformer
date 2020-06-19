@@ -10,7 +10,7 @@ config.read(working_directory + '/Terraformer.conf')
 default = config['DEFAULT']
 CONFIGURATION_SET = bool(default['Configured'])
 PASSWORD = default['Password']
-MAX_CPU_TEMP = default['MaxCPUTemp']
+MAX_CPU_TEMP = float(default['MaxCPUTemp'])
 
 # ENVIRONMENT #
 environment = config['ENVIRONMENT']
@@ -22,7 +22,7 @@ ENV_MIN_HUM = environment['MinHum']
 # ILLUMINATION #
 illumination = config['ILLUMINATION']
 ILLU_START_HOUR = illumination['StartHour']
-ILLU_STOP_HOUR = illumination['StopHour']
+ILLU_STOP_HOUR = illumination['EndHour']
 
 # EXTRACTION #
 extraction = config['EXTRACTION']
