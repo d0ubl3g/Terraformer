@@ -5,7 +5,7 @@ import schedule
 import Configuration
 from colorama import Style, Fore
 
-FAN_ON = True
+FAN_ON = False
 
 def scheduleAuto():
     schedule.every(30).seconds.do(autoControl)
@@ -13,11 +13,13 @@ def scheduleAuto():
 
 
 def turnON():
+    global FAN_ON
     FAN_ON = True
     print(Fore.LIGHTMAGENTA_EX + "[+] Turning on CPU Fan..." + Style.RESET_ALL)
 
 
 def turnOFF():
+    global FAN_ON
     FAN_ON = False
     print(Fore.MAGENTA + "[-] Turning off CPU Fan..." + Style.RESET_ALL)
 
