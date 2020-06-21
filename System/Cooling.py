@@ -1,11 +1,12 @@
 import subprocess
 
 import schedule
-
-import Configuration
 from colorama import Style, Fore
 
+import Configuration
+
 FAN_ON = False
+
 
 def scheduleAuto():
     schedule.every(30).seconds.do(autoControl)

@@ -1,6 +1,5 @@
 import subprocess
 
-
 GPIO_PIN = 17
 PULSE_LENGTH = 176
 ILLUMINATION_ON = "5264691"

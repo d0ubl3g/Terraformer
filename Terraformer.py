@@ -1,10 +1,12 @@
+import time
+
+import schedule
+from colorama import init, Fore, Style
+
 import Configuration
+from Control import Illumination, Extraction
 from System import Cooling
 from ThermoHygro import Receiver
-import schedule
-import time
-from colorama import init, Fore, Style
-from Control import Illumination
 
 init()
 
@@ -18,6 +20,11 @@ if Configuration.CONFIGURATION_SET:
     Receiver.scheduleAuto()
     print(Fore.LIGHTBLUE_EX + "[i] Initializing Illumination..." + Style.RESET_ALL)
     Illumination.schedule()
+    print(Fore.LIGHTBLUE_EX + "[i] Initializing Extraction..." + Style.RESET_ALL)
+    if Configuration.EXT_MODE == "auto":
+        Extraction.scheduleAuto()
+    else:
+        print("Schedule")
     while True:
         schedule.run_pending()
         time.sleep(5)

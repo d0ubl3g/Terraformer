@@ -1,7 +1,5 @@
-import sys
 import Adafruit_DHT
 import schedule
-import Configuration
 from colorama import Fore, Style
 
 TEMP = "0.0"
@@ -9,11 +7,11 @@ HUM = "0.0"
 
 
 def scheduleAuto():
-    schedule.every(20).seconds.do(getTempHum)
+    schedule.every(5).seconds.do(getTempHum)
 
 
 def getTempHum():
-    humidity, temperature = Adafruit_DHT.read_retry(Adafruit_DHT.DHT22, 15) #SENSOR , GPIOPIN
+    humidity, temperature = Adafruit_DHT.read_retry(Adafruit_DHT.DHT22, 15)  # SENSOR , GPIOPIN
     global TEMP
     global HUM
     if humidity is not None and temperature is not None:

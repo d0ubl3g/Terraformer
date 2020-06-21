@@ -1,6 +1,7 @@
 import schedule
-import Configuration
 from colorama import Fore, Style
+
+import Configuration
 from Comm import RCTransmitter
 
 ILLU_ON = False
