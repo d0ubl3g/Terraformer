@@ -6,6 +6,7 @@ from Comm import RCTransmitter
 from ThermoHygro import Receiver
 
 EXTRACTION_ON = False
+EXTRACTION_IN_CYCLE = False
 
 
 def scheduleAuto():
@@ -19,7 +20,7 @@ def autoAdjust():
         if not EXTRACTION_ON:
             turnON()
     else:
-        if EXTRACTION_ON:
+        if EXTRACTION_ON and not EXTRACTION_IN_CYCLE:
             turnOFF()
 
 
