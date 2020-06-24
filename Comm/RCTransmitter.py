@@ -15,4 +15,4 @@ ALL_OFF = "5272844"
 
 
 def sendCommand(command):
-    p = subprocess.run(["rpi-rf_send", "-g", GPIO_PIN, "-p", PULSE_LENGTH, "-t", "1", command])
+    p = subprocess.run(["rpi-rf_send", "-g", str(GPIO_PIN), "-p", str(PULSE_LENGTH), "-t", "1", str(command)])
