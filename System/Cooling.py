@@ -28,12 +28,12 @@ def turnOFF():
 def getCPUTemp():
     try:
         p = subprocess.check_output(['vcgencmd', 'measure_temp'])
-        cpuTemp = str(p).replace("temp=", "").replace("'C", "")
+        cpuTemp = str(p).replace("temp=", "").replace("'C", "").replace("\n", "")
     except Exception as e:
         cpuTemp = 0.0
         print(Fore.RED + "[!] Error obtaining CPU Temp.")
         print(str(e) + Style.RESET_ALL)
-    return float(str(cpuTemp))
+    return float(cpuTemp)
 
 
 def autoControl():
