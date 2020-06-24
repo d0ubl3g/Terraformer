@@ -28,7 +28,7 @@ def turnOFF():
 def getCPUTemp():
     try:
         p = subprocess.check_output(['vcgencmd', 'measure_temp'])
-        cpuTemp = p.replace("temp=", "").replace("'C", "")
+        cpuTemp = str(p).replace("temp=", "").replace("'C", "")
     except Exception as e:
         cpuTemp = 0.0
         print(Fore.RED + "[!] Error obtaining CPU Temp.")
