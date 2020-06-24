@@ -3,7 +3,7 @@ from colorama import Fore, Style
 
 import Configuration
 from Comm import RCTransmitter
-from ThermoHygro import Receiver
+from Sensors import Receiver
 
 EXTRACTION_ON = False
 EXTRACTION_IN_CYCLE = False

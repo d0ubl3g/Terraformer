@@ -6,7 +6,7 @@ from colorama import init, Fore, Style
 import Configuration
 from Control import Illumination, Extraction
 from System import Cooling
-from ThermoHygro import Receiver
+from Sensors import Receiver
 
 init()
 
@@ -16,7 +16,7 @@ if Configuration.CONFIGURATION_SET:
     print(Fore.LIGHTGREEN_EX + "[*] Configuration found." + Style.RESET_ALL)
     print(Fore.LIGHTBLUE_EX + "[ì] Initializing System Cooling..." + Style.RESET_ALL)
     Cooling.scheduleAuto()
-    print(Fore.LIGHTBLUE_EX + "[i] Initializing ThermoHygrometer..." + Style.RESET_ALL)
+    print(Fore.LIGHTBLUE_EX + "[i] Initializing Sensors..." + Style.RESET_ALL)
     Receiver.scheduleAuto()
     print(Fore.LIGHTBLUE_EX + "[i] Initializing Illumination..." + Style.RESET_ALL)
     Illumination.schedule()
