@@ -5,8 +5,8 @@ from colorama import init, Fore, Style
 
 import Configuration
 from Control import Illumination, Extraction
-from System import Cooling
 from Sensors import Receiver
+from System import Cooling
 
 init()
 
@@ -19,12 +19,12 @@ if Configuration.CONFIGURATION_SET:
     print(Fore.LIGHTBLUE_EX + "[i] Initializing Sensors..." + Style.RESET_ALL)
     Receiver.scheduleAuto()
     print(Fore.LIGHTBLUE_EX + "[i] Initializing Illumination..." + Style.RESET_ALL)
-    Illumination.schedule()
+    Illumination.scheduleHours()
     print(Fore.LIGHTBLUE_EX + "[i] Initializing Extraction..." + Style.RESET_ALL)
     if Configuration.EXT_MODE == "auto":
         Extraction.scheduleAuto()
     else:
-        print("Schedule")
+        print(Fore.RED + "[NOT IMPLEMENTED] Schedule Cycle" + Style.RESET_ALL)
     while True:
         schedule.run_pending()
         time.sleep(5)

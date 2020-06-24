@@ -7,7 +7,7 @@ from Comm import RCTransmitter
 ILLU_ON = False
 
 
-def schedule():
+def scheduleHours():
     schedule.every().day.at(Configuration.ILLU_START_HOUR).do(turnON)
     schedule.every().day.at(Configuration.ILLU_STOP_HOUR).do(turnOFF)
     print(Fore.LIGHTGREEN_EX + "[*] Illumination scheduled.")
