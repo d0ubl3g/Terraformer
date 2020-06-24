@@ -33,7 +33,7 @@ def getCPUTemp():
         cpuTemp = 0.0
         print(Fore.RED + "[!] Error obtaining CPU Temp.")
         print(str(e) + Style.RESET_ALL)
-    return float(cpuTemp)
+    return float(str(cpuTemp))
 
 
 def autoControl():
