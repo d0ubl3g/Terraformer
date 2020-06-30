@@ -17,10 +17,9 @@ def scheduleAuto():
 
 def autoAdjust():
     if Receiver.TEMP >= Configuration.ENV_MAX_TEMP or Receiver.HUM >= Configuration.ENV_MAX_HUM:
-        if not EXTRACTION_ON:
-            turnON()
+        turnON()
     else:
-        if EXTRACTION_ON and not EXTRACTION_IN_CYCLE:
+        if not EXTRACTION_IN_CYCLE:
             turnOFF()
 
 

@@ -40,8 +40,6 @@ def autoControl():
     cpuTemp = getCPUTemp()
     print(Fore.LIGHTBLUE_EX + "[i] CPU Temp = " + str(cpuTemp) + " ºC")
     if cpuTemp >= Configuration.MAX_CPU_TEMP:
-        if not FAN_ON:
-            turnON()
+        turnON()
     else:
-        if FAN_ON:
-            turnOFF()
+        turnOFF()

@@ -4,7 +4,7 @@ import schedule
 from colorama import init, Fore, Style
 
 import Configuration
-from Control import Illumination, Extraction
+from Control import Illumination, Extraction, Ventilation
 from Sensors import Receiver
 from System import Cooling
 
@@ -23,6 +23,11 @@ if Configuration.CONFIGURATION_SET:
     print(Fore.LIGHTBLUE_EX + "[i] Initializing Extraction..." + Style.RESET_ALL)
     if Configuration.EXT_MODE == "auto":
         Extraction.scheduleAuto()
+    else:
+        print(Fore.RED + "[NOT IMPLEMENTED] Schedule Cycle" + Style.RESET_ALL)
+    print(Fore.LIGHTBLUE_EX + "[i] Initializing Ventilation..." + Style.RESET_ALL)
+    if Configuration.VENT_MODE == "auto":
+        Ventilation.scheduleAuto()
     else:
         print(Fore.RED + "[NOT IMPLEMENTED] Schedule Cycle" + Style.RESET_ALL)
     while True:
