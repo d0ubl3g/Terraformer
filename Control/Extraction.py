@@ -11,8 +11,13 @@ EXTRACTION_IN_CYCLE = False
 
 def scheduleAuto():
     schedule.every(10).seconds.do(autoAdjust)
-    # CYCLE
+    scheduleCycle(Configuration.EXT_CYCLE_EVERY, Configuration.EXT_CYCLE_DURATION)
     print(Fore.LIGHTGREEN_EX + "[*] Auto Extraction + Cycles scheduled.")
+
+
+def scheduleCycle(e, d):
+    schedule.every(e).minutes.do(cycleON())
+    schedule.every(e+d).minutes.do(cycleOFF())
 
 
 def autoAdjust():
@@ -21,6 +26,18 @@ def autoAdjust():
     else:
         if not EXTRACTION_IN_CYCLE:
             turnOFF()
+
+
+def cycleON():
+    global EXTRACTION_IN_CYCLE
+    EXTRACTION_IN_CYCLE = True
+    turnON()
+
+
+def cycleOFF():
+    global EXTRACTION_IN_CYCLE
+    EXTRACTION_IN_CYCLE = False
+    turnOFF()
 
 
 def turnON():

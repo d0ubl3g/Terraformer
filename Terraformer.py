@@ -33,3 +33,5 @@ if Configuration.CONFIGURATION_SET:
     while True:
         schedule.run_pending()
         time.sleep(5)
+else:
+    print(Fore.RED + "[!] Configuration is not set.")

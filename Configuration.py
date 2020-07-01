@@ -27,10 +27,15 @@ ILLU_STOP_HOUR = illumination['EndHour']
 # EXTRACTION #
 extraction = config['EXTRACTION']
 EXT_MODE = extraction['Mode']
+EXT_CYCLE_EVERY = extraction['CycleEvery']
+EXT_CYCLE_DURATION = extraction['CycleDuration']
 
 # VENTILATION #
 ventilation = config['VENTILATION']
 VENT_MODE = ventilation['Mode']
+VENT_CYCLE_EVERY = ventilation['CycleEvery']
+VENT_CYCLE_DURATION = ventilation['CycleDuration']
+
 
 # CO2 #
 co2 = config['CO2']

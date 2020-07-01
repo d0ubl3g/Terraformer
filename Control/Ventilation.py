@@ -11,8 +11,25 @@ VENTILATION_IN_CYCLE = False
 
 def scheduleAuto():
     schedule.every(10).seconds.do(autoAdjust)
-    # CYCLE
+    scheduleCycle(Configuration.VENT_CYCLE_EVERY, Configuration.VENT_CYCLE_DURATION)
     print(Fore.LIGHTGREEN_EX + "[*] Auto Extraction + Cycles scheduled.")
+
+
+def scheduleCycle(e, d):
+    schedule.every(e).minutes.do(cycleON())
+    schedule.every(e+d).minutes.do(cycleOFF())
+
+
+def cycleON():
+    global VENTILATION_IN_CYCLE
+    VENTILATION_IN_CYCLE = True
+    turnON()
+
+
+def cycleOFF():
+    global VENTILATION_IN_CYCLE
+    VENTILATION_IN_CYCLE = False
+    turnOFF()
 
 
 def turnON():
