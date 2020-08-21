@@ -16,8 +16,8 @@ def scheduleAuto():
 
 
 def scheduleCycle(e, d):
-    schedule.every(e).minutes.do(cycleON())
-    schedule.every(e+d).minutes.do(cycleOFF())
+    schedule.every(e).minutes.do(cycleON)
+    schedule.every(e+d).minutes.do(cycleOFF)
 
 
 def autoAdjust():
