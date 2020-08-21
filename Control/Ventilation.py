@@ -11,7 +11,7 @@ VENTILATION_IN_CYCLE = False
 
 def scheduleAuto():
     schedule.every(10).seconds.do(autoAdjust)
-    scheduleCycle(Configuration.VENT_CYCLE_EVERY, Configuration.VENT_CYCLE_DURATION)
+    scheduleCycle(int(Configuration.VENT_CYCLE_EVERY), int(Configuration.VENT_CYCLE_DURATION))
     print(Fore.LIGHTGREEN_EX + "[*] Auto Extraction + Cycles scheduled.")
 
 
