@@ -13,7 +13,7 @@ def scheduleAuto():
     schedule.every(int(Configuration.VENT_AUTO_FREQ)).seconds.do(autoAdjust)
     scheduleCycle(int(Configuration.VENT_CYCLE_EVERY), int(Configuration.VENT_CYCLE_DURATION))
     print(Fore.LIGHTGREEN_EX + "[*] Auto Ventilation scheduled every " + Configuration.VENT_AUTO_FREQ + " seconds.")
-    print(Fore.LIGHTGREEN_EX + "[*] Extraction cycles scheduled every " + Configuration.VENT_CYCLE_EVERY +
+    print(Fore.LIGHTGREEN_EX + "[*] Ventilation cycles scheduled every " + Configuration.VENT_CYCLE_EVERY +
           " minutes for " + Configuration.VENT_CYCLE_DURATION + " minutes.")
 
 
@@ -47,8 +47,15 @@ def turnOFF():
 
 
 def autoAdjust():
-    if Receiver.TEMP >= Configuration.ENV_MAX_TEMP or Receiver.HUM >= Configuration.ENV_MAX_HUM:
-        turnON()
+    if Configuration.DAY:
+        if Receiver.TEMP >= Configuration.MAX_DAY_TEMP or Receiver.HUM >= Configuration.MAX_DAY_HUM:
+            turnON()
+        else:
+            if not VENTILATION_IN_CYCLE:
+                turnOFF()
     else:
-        if not VENTILATION_IN_CYCLE:
-            turnOFF()
+        if Receiver.TEMP >= Configuration.MAX_NIGHT_TEMP or Receiver.HUM >= Configuration.MAX_NIGHT_HUM:
+            turnON()
+        else:
+            if not VENTILATION_IN_CYCLE:
+                turnOFF()

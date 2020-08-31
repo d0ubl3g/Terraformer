@@ -15,9 +15,11 @@ def scheduleHours():
 
 def turnON():
     RCTransmitter.sendCommand(RCTransmitter.ILLUMINATION_ON)
+    Configuration.DAY = True
     print(Fore.GREEN + "[*] Illumination turned on." + Style.RESET_ALL)
 
 
 def turnOFF():
     RCTransmitter.sendCommand(RCTransmitter.ILLUMINATION_OFF)
+    Configuration.DAY = False
     print(Fore.YELLOW + "[*] Illumination turned off." + Style.RESET_ALL)

@@ -12,8 +12,15 @@ init()
 
 print(Style.BRIGHT + Fore.BLUE + "Terraformer starting..." + Style.RESET_ALL)
 print(Fore.LIGHTBLUE_EX + "[i] Loading configuration." + Style.RESET_ALL)
+Configuration.initializeDynamicConf()
 if Configuration.CONFIGURATION_SET:
     print(Fore.LIGHTGREEN_EX + "[*] Configuration found." + Style.RESET_ALL)
+    if Configuration.ENV_PHASE == "veg":
+        print(Fore.LIGHTBLUE_EX + "[i] Vegetative phase configured.")
+    elif Configuration.ENV_PHASE == "flow":
+        print(Fore.LIGHTBLUE_EX + "[i] Flowering phase configured.")
+    elif Configuration.ENV_PHASE == "dry":
+        print(Fore.LIGHTBLUE_EX + "[i] Dry phase configured.")
     print(Fore.LIGHTBLUE_EX + "[ì] Initializing System Cooling..." + Style.RESET_ALL)
     Cooling.scheduleAuto()
     print(Fore.LIGHTBLUE_EX + "[i] Initializing Sensors..." + Style.RESET_ALL)

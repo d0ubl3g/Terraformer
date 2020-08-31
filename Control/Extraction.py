@@ -23,11 +23,18 @@ def scheduleCycle(e, d):
 
 
 def autoAdjust():
-    if Receiver.TEMP >= Configuration.ENV_MAX_TEMP or Receiver.HUM >= Configuration.ENV_MAX_HUM:
-        turnON()
+    if Configuration.DAY:
+        if Receiver.TEMP >= Configuration.MAX_DAY_TEMP or Receiver.HUM >= Configuration.MAX_DAY_HUM:
+            turnON()
+        else:
+            if not EXTRACTION_IN_CYCLE:
+                turnOFF()
     else:
-        if not EXTRACTION_IN_CYCLE:
-            turnOFF()
+        if Receiver.TEMP >= Configuration.MAX_NIGHT_TEMP or Receiver.HUM >= Configuration.MAX_NIGHT_HUM:
+            turnON()
+        else:
+            if not EXTRACTION_IN_CYCLE:
+                turnOFF()
 
 
 def cycleON():

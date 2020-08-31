@@ -14,11 +14,24 @@ MAX_CPU_TEMP = float(default['MaxCPUTemp'])
 
 # ENVIRONMENT #
 environment = config['ENVIRONMENT']
+ENV_PHASE = environment['Phase']
 ENV_DATA_FREQ = environment['DataFreq']
-ENV_MAX_TEMP = environment['MaxTemp']
-ENV_MIN_TEMP = environment['MinTemp']
-ENV_MAX_HUM = environment['MaxHum']
-ENV_MIN_HUM = environment['MinHum']
+ENV_VEG_DAY_MAX_TEMP = environment['VegDayMaxTemp']
+ENV_VEG_DAY_MIN_TEMP = environment['VegDayMinTemp']
+ENV_VEG_DAY_MAX_HUM = environment['VegDayMaxHum']
+ENV_VEG_DAY_MIN_HUM = environment['VegDayMinHum']
+ENV_VEG_NIGHT_MAX_TEMP = environment['VegNightMaxTemp']
+ENV_VEG_NIGHT_MIN_TEMP = environment['VegNightMinTemp']
+ENV_VEG_NIGHT_MAX_HUM = environment['VegNightMaxHum']
+ENV_VEG_NIGHT_MIN_HUM = environment['VegNightMinHum']
+ENV_FLOW_DAY_MAX_TEMP = environment['FlowDayMaxTemp']
+ENV_FLOW_DAY_MIN_TEMP = environment['FlowDayMinTemp']
+ENV_FLOW_DAY_MAX_HUM = environment['FlowDayMaxHum']
+ENV_FLOW_DAY_MIN_HUM = environment['FlowDayMinHum']
+ENV_FLOW_NIGHT_MAX_TEMP = environment['FlowNightMaxTemp']
+ENV_FLOW_NIGHT_MIN_TEMP = environment['FlowNightMinTemp']
+ENV_FLOW_NIGHT_MAX_HUM = environment['FlowNightMaxHum']
+ENV_FLOW_NIGHT_MIN_HUM = environment['FlowNightMinHum']
 
 # ILLUMINATION #
 illumination = config['ILLUMINATION']
@@ -39,7 +52,46 @@ VENT_AUTO_FREQ = ventilation['AutoFreq']
 VENT_CYCLE_EVERY = ventilation['CycleEvery']
 VENT_CYCLE_DURATION = ventilation['CycleDuration']
 
-
 # CO2 #
 co2 = config['CO2']
 CO2_MODE = co2['Mode']
+
+# DYNAMIC CONF #
+DAY = True
+MAX_DAY_TEMP = 0.0
+MIN_DAY_TEMP = 0.0
+MAX_NIGHT_TEMP = 0.0
+MIN_NIGHT_TEMP = 0.0
+MAX_DAY_HUM = 0.0
+MIN_DAY_HUM = 0.0
+MAX_NIGHT_HUM = 0.0
+MIN_NIGHT_HUM = 0.0
+
+
+def initializeDynamicConf():
+    global MAX_DAY_TEMP
+    global MIN_DAY_TEMP
+    global MAX_NIGHT_TEMP
+    global MIN_NIGHT_TEMP
+    global MAX_DAY_HUM
+    global MIN_DAY_HUM
+    global MAX_NIGHT_HUM
+    global MIN_NIGHT_HUM
+    if ENV_PHASE == "veg":
+        MAX_DAY_TEMP = ENV_VEG_DAY_MAX_TEMP
+        MIN_DAY_TEMP = ENV_VEG_DAY_MIN_TEMP
+        MAX_NIGHT_TEMP = ENV_VEG_NIGHT_MAX_TEMP
+        MIN_NIGHT_TEMP = ENV_VEG_NIGHT_MIN_TEMP
+        MAX_DAY_HUM = ENV_VEG_DAY_MAX_HUM
+        MIN_DAY_HUM = ENV_VEG_DAY_MIN_HUM
+        MAX_NIGHT_HUM = ENV_VEG_NIGHT_MAX_HUM
+        MIN_NIGHT_HUM = ENV_VEG_NIGHT_MIN_HUM
+    elif ENV_PHASE == "flow":
+        MAX_DAY_TEMP = ENV_FLOW_DAY_MAX_TEMP
+        MIN_DAY_TEMP = ENV_FLOW_DAY_MIN_TEMP
+        MAX_NIGHT_TEMP = ENV_FLOW_NIGHT_MAX_TEMP
+        MIN_NIGHT_TEMP = ENV_FLOW_NIGHT_MIN_TEMP
+        MAX_DAY_HUM = ENV_FLOW_DAY_MAX_HUM
+        MIN_DAY_HUM = ENV_FLOW_DAY_MIN_HUM
+        MAX_NIGHT_HUM = ENV_FLOW_NIGHT_MAX_HUM
+        MIN_NIGHT_HUM = ENV_FLOW_NIGHT_MIN_HUM
