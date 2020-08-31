@@ -10,9 +10,11 @@ VENTILATION_IN_CYCLE = False
 
 
 def scheduleAuto():
-    schedule.every(10).seconds.do(autoAdjust)
+    schedule.every(int(Configuration.VENT_AUTO_FREQ)).seconds.do(autoAdjust)
     scheduleCycle(int(Configuration.VENT_CYCLE_EVERY), int(Configuration.VENT_CYCLE_DURATION))
-    print(Fore.LIGHTGREEN_EX + "[*] Auto Extraction + Cycles scheduled.")
+    print(Fore.LIGHTGREEN_EX + "[*] Auto Ventilation scheduled every " + Configuration.VENT_AUTO_FREQ + " seconds.")
+    print(Fore.LIGHTGREEN_EX + "[*] Extraction cycles scheduled every " + Configuration.VENT_CYCLE_EVERY +
+          " minutes for " + Configuration.VENT_CYCLE_DURATION + " minutes.")
 
 
 def scheduleCycle(e, d):
@@ -24,17 +26,19 @@ def cycleON():
     global VENTILATION_IN_CYCLE
     VENTILATION_IN_CYCLE = True
     turnON()
+    print(Fore.GREEN + "[*] Ventilation cycle started." + Style.RESET_ALL)
 
 
 def cycleOFF():
     global VENTILATION_IN_CYCLE
     VENTILATION_IN_CYCLE = False
     turnOFF()
+    print(Fore.YELLOW + "[*] Ventilation cycle finished." + Style.RESET_ALL)
 
 
 def turnON():
     RCTransmitter.sendCommand(RCTransmitter.VENTILATION_ON)
-    print(Fore.GREEN + "[*] Ventilation turned on." + Style.RESET_ALL)
+    print(Fore.LIGHTGREEN_EX + "[*] Ventilation turned on." + Style.RESET_ALL)
 
 
 def turnOFF():

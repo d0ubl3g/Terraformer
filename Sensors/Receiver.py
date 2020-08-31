@@ -1,13 +1,14 @@
 import Adafruit_DHT
 import schedule
 from colorama import Fore, Style
+import Configuration
 
 TEMP = "0.0"
 HUM = "0.0"
 
 
 def scheduleAuto():
-    schedule.every(5).seconds.do(getTempHum)
+    schedule.every(int(Configuration.ENV_DATA_FREQ)).seconds.do(getTempHum)
 
 
 def getTempHum():

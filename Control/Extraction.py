@@ -10,9 +10,11 @@ EXTRACTION_IN_CYCLE = False
 
 
 def scheduleAuto():
-    schedule.every(10).seconds.do(autoAdjust)
+    schedule.every(int(Configuration.EXT_AUTO_FREQ)).seconds.do(autoAdjust)
     scheduleCycle(int(Configuration.EXT_CYCLE_EVERY), int(Configuration.EXT_CYCLE_DURATION))
-    print(Fore.LIGHTGREEN_EX + "[*] Auto Extraction + Cycles scheduled.")
+    print(Fore.LIGHTGREEN_EX + "[*] Auto Extraction scheduled every " + Configuration.EXT_AUTO_FREQ + " seconds.")
+    print(Fore.LIGHTGREEN_EX + "[*] Extraction cycles scheduled every " + Configuration.EXT_CYCLE_EVERY +
+          " minutes for " + Configuration.EXT_CYCLE_DURATION + " minutes.")
 
 
 def scheduleCycle(e, d):
@@ -32,17 +34,19 @@ def cycleON():
     global EXTRACTION_IN_CYCLE
     EXTRACTION_IN_CYCLE = True
     turnON()
+    print(Fore.LIGHTGREEN_EX + "[*] Extraction cycle started." + Style.RESET_ALL)
 
 
 def cycleOFF():
     global EXTRACTION_IN_CYCLE
     EXTRACTION_IN_CYCLE = False
     turnOFF()
+    print(Fore.YELLOW + "[*] Extraction cycle finished." + Style.RESET_ALL)
 
 
 def turnON():
     RCTransmitter.sendCommand(RCTransmitter.EXTRACTION_ON)
-    print(Fore.GREEN + "[*] Extraction turned on." + Style.RESET_ALL)
+    print(Fore.LIGHTGREEN_EX + "[*] Extraction turned on." + Style.RESET_ALL)
 
 
 def turnOFF():

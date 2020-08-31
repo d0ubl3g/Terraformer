@@ -14,6 +14,7 @@ MAX_CPU_TEMP = float(default['MaxCPUTemp'])
 
 # ENVIRONMENT #
 environment = config['ENVIRONMENT']
+ENV_DATA_FREQ = environment['DataFreq']
 ENV_MAX_TEMP = environment['MaxTemp']
 ENV_MIN_TEMP = environment['MinTemp']
 ENV_MAX_HUM = environment['MaxHum']
@@ -27,12 +28,14 @@ ILLU_STOP_HOUR = illumination['EndHour']
 # EXTRACTION #
 extraction = config['EXTRACTION']
 EXT_MODE = extraction['Mode']
+EXT_AUTO_FREQ = extraction['AutoFreq']
 EXT_CYCLE_EVERY = extraction['CycleEvery']
 EXT_CYCLE_DURATION = extraction['CycleDuration']
 
 # VENTILATION #
 ventilation = config['VENTILATION']
 VENT_MODE = ventilation['Mode']
+VENT_AUTO_FREQ = ventilation['AutoFreq']
 VENT_CYCLE_EVERY = ventilation['CycleEvery']
 VENT_CYCLE_DURATION = ventilation['CycleDuration']
 
