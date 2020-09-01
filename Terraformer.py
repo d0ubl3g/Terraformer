@@ -11,7 +11,7 @@ from System import Cooling
 
 init()
 logging.basicConfig(format='%(asctime)s %(levelname) %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p',
-                    filename='terraformer.log')
+                    filename='terraformer.log', level=logging.DEBUG, filemode='w')
 
 print(Style.BRIGHT + Fore.BLUE + "Terraformer starting..." + Style.RESET_ALL)
 logging.info("Loading configuration...")
