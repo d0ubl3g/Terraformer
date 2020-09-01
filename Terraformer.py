@@ -1,3 +1,4 @@
+import logging
 import time
 
 import schedule
@@ -9,36 +10,38 @@ from Sensors import Receiver
 from System import Cooling
 
 init()
+logging.basicConfig(format='%(asctime)s %(levelname) %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p',
+                    filename='terraformer.log')
 
 print(Style.BRIGHT + Fore.BLUE + "Terraformer starting..." + Style.RESET_ALL)
-print(Fore.LIGHTBLUE_EX + "[i] Loading configuration." + Style.RESET_ALL)
+logging.info("Loading configuration...")
 Configuration.initializeDynamicConf()
 if Configuration.CONFIGURATION_SET:
-    print(Fore.LIGHTGREEN_EX + "[*] Configuration found." + Style.RESET_ALL)
+    logging.info("Configuration loaded successfully.")
     if Configuration.ENV_PHASE == "veg":
-        print(Fore.LIGHTBLUE_EX + "[i] Vegetative phase configured.")
+        logging.info("Vegetative phase configured.")
     elif Configuration.ENV_PHASE == "flow":
-        print(Fore.LIGHTBLUE_EX + "[i] Flowering phase configured.")
+        logging.info("Flowering phase configured.")
     elif Configuration.ENV_PHASE == "dry":
-        print(Fore.LIGHTBLUE_EX + "[i] Dry phase configured.")
-    print(Fore.LIGHTBLUE_EX + "[ì] Initializing System Cooling..." + Style.RESET_ALL)
+        logging.info("Dry phase configured.")
+    logging.info("Initializing System Cooling...")
     Cooling.scheduleAuto()
-    print(Fore.LIGHTBLUE_EX + "[i] Initializing Sensors..." + Style.RESET_ALL)
+    logging.info("Initializing Sensors...")
     Receiver.scheduleAuto()
-    print(Fore.LIGHTBLUE_EX + "[i] Initializing Illumination..." + Style.RESET_ALL)
+    logging.info("Initializing Illumination...")
     Illumination.scheduleHours()
-    print(Fore.LIGHTBLUE_EX + "[i] Initializing Extraction..." + Style.RESET_ALL)
+    logging.info("Initializing Extraction...")
     if Configuration.EXT_MODE == "auto":
         Extraction.scheduleAuto()
     else:
-        print(Fore.RED + "[NOT IMPLEMENTED] Schedule Cycle" + Style.RESET_ALL)
-    print(Fore.LIGHTBLUE_EX + "[i] Initializing Ventilation..." + Style.RESET_ALL)
+        logging.error("[NOT IMPLEMENTED] Ext Schedule Cycle")
+    logging.info("Initializing Ventilation...")
     if Configuration.VENT_MODE == "auto":
         Ventilation.scheduleAuto()
     else:
-        print(Fore.RED + "[NOT IMPLEMENTED] Schedule Cycle" + Style.RESET_ALL)
+        logging.error("[NOT IMPLEMENTED] Vent Schedule Cycle")
     while True:
         schedule.run_pending()
         time.sleep(1)
 else:
-    print(Fore.RED + "[!] Configuration is not set.")
+    logging.warning("Configuration not set.")

@@ -1,6 +1,8 @@
+import logging
+
 import Adafruit_DHT
 import schedule
-from colorama import Fore, Style
+
 import Configuration
 
 TEMP = "0.0"
@@ -19,8 +21,8 @@ def getTempHum():
         value = "{0:0.1f},{1:0.1f}".format(temperature, humidity)
         TEMP = "{0:0.1f}".format(temperature)
         HUM = "{0:0.1f}".format(humidity)
-        print(Fore.LIGHTGREEN_EX + "[i] Temperature: " + TEMP + "ºC " + "Humidity: " + HUM + "%" + Style.RESET_ALL)
+        logging.debug("Temperature: " + TEMP + "ºC " + "Humidity: " + HUM + "%")
         return value
     else:
-        print(Fore.RED + "Error receiving data." + Style.RESET_ALL)
+        logging.error("Error receiving data from sensor.")
         return None
