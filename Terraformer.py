@@ -39,6 +39,6 @@ if Configuration.CONFIGURATION_SET:
         print(Fore.RED + "[NOT IMPLEMENTED] Schedule Cycle" + Style.RESET_ALL)
     while True:
         schedule.run_pending()
-        time.sleep(5)
+        time.sleep(1)
 else:
     print(Fore.RED + "[!] Configuration is not set.")
