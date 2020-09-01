@@ -1,5 +1,6 @@
 import logging
 import subprocess
+import os
 
 GPIO_PIN = 17
 PULSE_LENGTH = 176
@@ -16,5 +17,7 @@ ALL_OFF = "5272844"
 
 
 def sendCommand(command):
-    subprocess.check_output(["rpi-rf_send", "-g", str(GPIO_PIN), "-p", str(PULSE_LENGTH), "-t", "1", str(command)])
+    dev_null = open(os.devnull, 'w')
+    subprocess.run(["rpi-rf_send", "-g", str(GPIO_PIN), "-p", str(PULSE_LENGTH), "-t", "1", str(command)],
+                   stderr=dev_null, stdout=dev_null)
     logging.info(str(command) + " transmitted vía RF.")
