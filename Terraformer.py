@@ -10,7 +10,7 @@ from Sensors import Receiver
 from System import Cooling
 
 init()
-logging.basicConfig(format='%(asctime)s %(levelname) %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p',
+logging.basicConfig(format='%(asctime)s %(levelname)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p',
                     filename='terraformer.log', level=logging.DEBUG, filemode='w')
 
 print(Style.BRIGHT + Fore.BLUE + "Terraformer starting..." + Style.RESET_ALL)
