@@ -16,6 +16,5 @@ ALL_OFF = "5272844"
 
 
 def sendCommand(command):
-    p = str(
-        subprocess.check_output(["rpi-rf_send", "-g", str(GPIO_PIN), "-p", str(PULSE_LENGTH), "-t", "1", str(command)]))
-    logging.info(p)
+    subprocess.check_output(["rpi-rf_send", "-g", str(GPIO_PIN), "-p", str(PULSE_LENGTH), "-t", "1", str(command)])
+    logging.info(str(command) + " transmitted vía RF.")
