@@ -1,6 +1,7 @@
 import logging
 
 import schedule
+import threading
 
 import Configuration
 from Comm import RCTransmitter
@@ -12,21 +13,22 @@ EXTRACTION_IN_CYCLE = False
 
 def scheduleAuto():
     schedule.every(int(Configuration.EXT_AUTO_FREQ)).seconds.do(autoAdjust)
-    scheduleCycle(int(Configuration.EXT_CYCLE_EVERY), int(Configuration.EXT_CYCLE_DURATION))
+    scheduleCycle(int(Configuration.EXT_CYCLE_EVERY))
     logging.info("Auto Extraction scheduled every " + Configuration.EXT_AUTO_FREQ + " seconds.")
     logging.info("Extraction cycles scheduled every " + Configuration.EXT_CYCLE_EVERY + " minutes for " +
                  Configuration.EXT_CYCLE_DURATION + " minutes.")
 
 
-def scheduleCycle(e, d):
+def scheduleCycle(e):
     schedule.every(e).minutes.do(cycleON)
-    schedule.every(e + d).minutes.do(cycleOFF)
 
 
 def cycleON():
     global EXTRACTION_IN_CYCLE
     EXTRACTION_IN_CYCLE = True
     turnON()
+    timer = threading.Timer(float(int(Configuration.EXT_CYCLE_DURATION) * 60), cycleOFF)
+    timer.start()
     logging.info("Extraction cycle started.")
 
 

@@ -1,6 +1,7 @@
 import logging
 
 import schedule
+import threading
 
 import Configuration
 from Comm import RCTransmitter
@@ -20,13 +21,14 @@ def scheduleAuto():
 
 def scheduleCycle(e, d):
     schedule.every(e).minutes.do(cycleON)
-    schedule.every(e + d).minutes.do(cycleOFF)
 
 
 def cycleON():
     global VENTILATION_IN_CYCLE
     VENTILATION_IN_CYCLE = True
     turnON()
+    timer = threading.Timer(float(int(Configuration.VENT_CYCLE_DURATION) * 60), cycleOFF)
+    timer.start()
     logging.info("Ventilation cycle started.")
 
 
