@@ -1,3 +1,4 @@
+import argparse
 import logging
 import time
 
@@ -13,9 +14,15 @@ init()
 logging.basicConfig(format='%(asctime)s %(levelname)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p',
                     filename='terraformer.log', level=logging.DEBUG, filemode='w')
 
+parser = argparse.ArgumentParser()
+parser.add_argument("-N", "--night", help="Start in Night mode", action="store_true")
+args = parser.parse_args()
+
 print(Style.BRIGHT + Fore.BLUE + "Terraformer starting..." + Style.RESET_ALL)
 logging.info("Loading configuration...")
 Configuration.initializeDynamicConf()
+if args.night:
+    Configuration.DAY = False
 if Configuration.CONFIGURATION_SET:
     logging.info("Configuration loaded successfully.")
     if Configuration.ENV_PHASE == "veg":

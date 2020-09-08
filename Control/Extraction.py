@@ -1,7 +1,7 @@
 import logging
+import threading
 
 import schedule
-import threading
 
 import Configuration
 from Comm import RCTransmitter
