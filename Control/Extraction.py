@@ -23,21 +23,6 @@ def scheduleCycle(e, d):
     schedule.every(e + d).minutes.do(cycleOFF)
 
 
-def autoAdjust():
-    if Configuration.DAY:
-        if Receiver.TEMP >= Configuration.MAX_DAY_TEMP or Receiver.HUM >= Configuration.MAX_DAY_HUM:
-            turnON()
-        else:
-            if not EXTRACTION_IN_CYCLE:
-                turnOFF()
-    else:
-        if Receiver.TEMP >= Configuration.MAX_NIGHT_TEMP or Receiver.HUM >= Configuration.MAX_NIGHT_HUM:
-            turnON()
-        else:
-            if not EXTRACTION_IN_CYCLE:
-                turnOFF()
-
-
 def cycleON():
     global EXTRACTION_IN_CYCLE
     EXTRACTION_IN_CYCLE = True
@@ -60,3 +45,18 @@ def turnON():
 def turnOFF():
     RCTransmitter.sendCommand(RCTransmitter.EXTRACTION_OFF)
     logging.info("Extraction turned off.")
+
+
+def autoAdjust():
+    if Configuration.DAY:
+        if Receiver.TEMP >= Configuration.MAX_DAY_TEMP or Receiver.HUM >= Configuration.MAX_DAY_HUM:
+            turnON()
+        else:
+            if not EXTRACTION_IN_CYCLE:
+                turnOFF()
+    else:
+        if Receiver.TEMP >= Configuration.MAX_NIGHT_TEMP or Receiver.HUM >= Configuration.MAX_NIGHT_HUM:
+            turnON()
+        else:
+            if not EXTRACTION_IN_CYCLE:
+                turnOFF()

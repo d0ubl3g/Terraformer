@@ -1,6 +1,6 @@
 import logging
-import subprocess
 import os
+import subprocess
 
 GPIO_PIN = 17
 PULSE_LENGTH = 176
