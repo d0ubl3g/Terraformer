@@ -1,6 +1,7 @@
 import logging
 import os
 import subprocess
+import threading
 
 GPIO_PIN = 17
 PULSE_LENGTH = 176
@@ -15,9 +16,13 @@ CO2_OFF = "co2_off"
 ALL_ON = "5272835"
 ALL_OFF = "5272844"
 
+LOCK = threading.Lock()
+
 
 def sendCommand(command):
+    LOCK.acquire()
     dev_null = open(os.devnull, 'w')
     subprocess.run(["rpi-rf_send", "-g", str(GPIO_PIN), "-p", str(PULSE_LENGTH), "-t", "1", str(command)],
                    stderr=dev_null, stdout=dev_null)
     logging.info(str(command) + " transmitted vía RF.")
+    LOCK.release()
