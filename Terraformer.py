@@ -9,6 +9,7 @@ import Configuration
 from Control import Illumination, Extraction, Ventilation
 from Sensors import Receiver
 from System import Cooling
+from Modules import Banner
 
 init()
 logging.basicConfig(format='%(asctime)s %(levelname)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p',
@@ -16,8 +17,10 @@ logging.basicConfig(format='%(asctime)s %(levelname)s %(message)s', datefmt='%m/
 
 parser = argparse.ArgumentParser()
 parser.add_argument("-N", "--night", help="Start in Night mode", action="store_true")
+parser.add_argument("-R", "--receiver", help="RF Code Receiver mode", action="store_true")
 args = parser.parse_args()
 
+Banner.printBanner()
 print(Style.BRIGHT + Fore.BLUE + "Terraformer starting..." + Style.RESET_ALL)
 logging.info("Loading configuration...")
 Configuration.initializeDynamicConf()
