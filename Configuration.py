@@ -34,9 +34,13 @@ ENV_FLOW_NIGHT_MAX_HUM = environment['FlowNightMaxHum']
 ENV_FLOW_NIGHT_MIN_HUM = environment['FlowNightMinHum']
 
 # ILLUMINATION #
+ILLU_START_HOUR = ""
+ILLU_STOP_HOUR = ""
 illumination = config['ILLUMINATION']
-ILLU_START_HOUR = illumination['StartHour']
-ILLU_STOP_HOUR = illumination['EndHour']
+ILLU_VEG_START_HOUR = illumination['VegStartHour']
+ILLU_VEG_STOP_HOUR = illumination['VegEndHour']
+ILLU_FLOW_START_HOUR = illumination['FlowStartHour']
+ILLU_FLOW_STOP_HOUR = illumination['FlowEndHour']
 
 # EXTRACTION #
 extraction = config['EXTRACTION']
@@ -69,6 +73,8 @@ MIN_NIGHT_HUM = 0.0
 
 
 def initializeDynamicConf():
+    global ILLU_START_HOUR
+    global ILLU_STOP_HOUR
     global MAX_DAY_TEMP
     global MIN_DAY_TEMP
     global MAX_NIGHT_TEMP
@@ -78,6 +84,8 @@ def initializeDynamicConf():
     global MAX_NIGHT_HUM
     global MIN_NIGHT_HUM
     if ENV_PHASE == "veg":
+        ILLU_START_HOUR = ILLU_VEG_START_HOUR
+        ILLU_STOP_HOUR = ILLU_VEG_STOP_HOUR
         MAX_DAY_TEMP = ENV_VEG_DAY_MAX_TEMP
         MIN_DAY_TEMP = ENV_VEG_DAY_MIN_TEMP
         MAX_NIGHT_TEMP = ENV_VEG_NIGHT_MAX_TEMP
@@ -87,6 +95,8 @@ def initializeDynamicConf():
         MAX_NIGHT_HUM = ENV_VEG_NIGHT_MAX_HUM
         MIN_NIGHT_HUM = ENV_VEG_NIGHT_MIN_HUM
     elif ENV_PHASE == "flow":
+        ILLU_START_HOUR = ILLU_FLOW_START_HOUR
+        ILLU_STOP_HOUR = ILLU_FLOW_STOP_HOUR
         MAX_DAY_TEMP = ENV_FLOW_DAY_MAX_TEMP
         MIN_DAY_TEMP = ENV_FLOW_DAY_MIN_TEMP
         MAX_NIGHT_TEMP = ENV_FLOW_NIGHT_MAX_TEMP
