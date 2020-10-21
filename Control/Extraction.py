@@ -20,14 +20,14 @@ def scheduleAuto():
 
 
 def scheduleCycle(e):
-    schedule.every(e).minutes.do(cycleON)
+    schedule.every(e).seconds.do(cycleON)
 
 
 def cycleON():
     global EXTRACTION_IN_CYCLE
     EXTRACTION_IN_CYCLE = True
     turnON()
-    timer = threading.Timer(float(int(Configuration.EXT_CYCLE_DURATION) * 60), cycleOFF)
+    timer = threading.Timer(float(Configuration.EXT_CYCLE_DURATION), cycleOFF)
     timer.start()
     logging.info("Extraction cycle started.")
 

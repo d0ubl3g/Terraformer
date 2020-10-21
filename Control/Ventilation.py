@@ -20,14 +20,14 @@ def scheduleAuto():
 
 
 def scheduleCycle(e, d):
-    schedule.every(e).minutes.do(cycleON)
+    schedule.every(e).seconds.do(cycleON)
 
 
 def cycleON():
     global VENTILATION_IN_CYCLE
     VENTILATION_IN_CYCLE = True
     turnON()
-    timer = threading.Timer(float(int(Configuration.VENT_CYCLE_DURATION) * 60), cycleOFF)
+    timer = threading.Timer(float(Configuration.VENT_CYCLE_DURATION), cycleOFF)
     timer.start()
     logging.info("Ventilation cycle started.")
 
