@@ -15,8 +15,8 @@ def scheduleAuto():
     schedule.every(int(Configuration.EXT_AUTO_FREQ)).seconds.do(autoAdjust)
     scheduleCycle(int(Configuration.EXT_CYCLE_EVERY))
     logging.info("Auto Extraction scheduled every " + Configuration.EXT_AUTO_FREQ + " seconds.")
-    logging.info("Extraction cycles scheduled every " + Configuration.EXT_CYCLE_EVERY + " minutes for " +
-                 Configuration.EXT_CYCLE_DURATION + " minutes.")
+    logging.info("Extraction cycles scheduled every " + Configuration.EXT_CYCLE_EVERY + " seconds for " +
+                 Configuration.EXT_CYCLE_DURATION + " seconds.")
 
 
 def scheduleCycle(e):

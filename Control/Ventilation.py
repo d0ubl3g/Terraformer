@@ -15,8 +15,8 @@ def scheduleAuto():
     schedule.every(int(Configuration.VENT_AUTO_FREQ)).seconds.do(autoAdjust)
     scheduleCycle(int(Configuration.VENT_CYCLE_EVERY), int(Configuration.VENT_CYCLE_DURATION))
     logging.info("Auto Ventilation scheduled every " + Configuration.VENT_AUTO_FREQ + " seconds.")
-    logging.info("Ventilation cycles scheduled every " + Configuration.VENT_CYCLE_EVERY + " minutes for " +
-                 Configuration.VENT_CYCLE_DURATION + " minutes.")
+    logging.info("Ventilation cycles scheduled every " + Configuration.VENT_CYCLE_EVERY + " seconds for " +
+                 Configuration.VENT_CYCLE_DURATION + " seconds.")
 
 
 def scheduleCycle(e, d):
