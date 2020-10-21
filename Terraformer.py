@@ -14,6 +14,7 @@ from Modules import Banner
 init()
 logging.basicConfig(format='%(asctime)s %(levelname)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p',
                     filename='terraformer.log', level=logging.DEBUG, filemode='w')
+logging.getLogger('schedule').setLevel(logging.WARNING)
 
 parser = argparse.ArgumentParser()
 parser.add_argument("-N", "--night", help="Start in Night mode", action="store_true")
