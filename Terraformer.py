@@ -7,9 +7,9 @@ from colorama import init, Fore, Style
 
 import Configuration
 from Control import Illumination, Extraction, Ventilation
+from Modules import Banner
 from Sensors import Receiver
 from System import Cooling
-from Modules import Banner
 
 init()
 logging.basicConfig(format='%(asctime)s %(levelname)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p',

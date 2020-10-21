@@ -24,5 +24,5 @@ def sendCommand(command):
     dev_null = open(os.devnull, 'w')
     subprocess.run(["rpi-rf_send", "-g", str(GPIO_PIN), "-p", str(PULSE_LENGTH), "-t", "1", str(command)],
                    stderr=dev_null, stdout=dev_null)
-    logging.info(str(command) + " transmitted vía RF.")
+    logging.debug(str(command) + " transmitted vía RF.")
     LOCK.release()

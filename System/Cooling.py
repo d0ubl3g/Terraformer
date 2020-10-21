@@ -37,7 +37,7 @@ def getCPUTemp():
 
 def autoControl():
     cpuTemp = getCPUTemp()
-    logging.info("CPU Temp = " + str(cpuTemp) + " ºC")
+    logging.debug("CPU Temp = " + str(cpuTemp) + " ºC")
     if cpuTemp >= Configuration.MAX_CPU_TEMP:
         turnON()
     else:
