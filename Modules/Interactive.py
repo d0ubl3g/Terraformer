@@ -103,12 +103,15 @@ def execute(option):
         "ventilation auto start": ventilationAutoStart,
         "ventilation auto stop": ventilationAutoStop
     }
-    func = switcher.get(option, default="help")
+    func = switcher.get(option)
     func()
 
 
 def start():
     printMenu()
     while True:
-        option = input("=> " + Style.RESET_ALL)
-        execute(option)
+        try:
+            option = input("=> " + Style.RESET_ALL)
+            execute(option)
+        except Exception as e:
+            print(Fore.RED + "Invalid option." + Style.RESET_ALL)
