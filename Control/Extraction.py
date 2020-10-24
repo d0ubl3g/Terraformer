@@ -20,6 +20,7 @@ def scheduleAuto():
     logging.info("Extraction cycles scheduled every " + Configuration.EXT_CYCLE_EVERY + " seconds for " +
                  Configuration.EXT_CYCLE_DURATION + " seconds.")
 
+
 def reScheduleAuto():
     if not AUTO_SCHEDULED:
         schedule.every(int(Configuration.EXT_AUTO_FREQ)).seconds.do(autoAdjust).tag('extraction-auto')

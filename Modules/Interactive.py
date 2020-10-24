@@ -12,7 +12,7 @@ def printMenu():
     print("|     ... stop  : Stop extraction system.                                       |")
     print("|     ... auto  : Print autonomous extraction status                            |")
     print("|         ... start : Start autonomous extraction system.                       |")
-    print("|         ... stop : Stop autonomous extraction                                 |")
+    print("|         ... stop  : Stop autonomous extraction                                |")
     print("| illumination : Print illumination system status.                              |")
     print("|     ... start : Turn on illumination.                                         |")
     print("|     ... stop  : Turn off illumination.                                        |")
@@ -21,7 +21,7 @@ def printMenu():
     print("|     ... stop  : Stop ventilation system.                                      |")
     print("|     ... auto  : Print autonomous ventilation status                           |")
     print("|         ... start : Start autonomous ventilation system.                      |")
-    print("|         ... stop : Stop autonomous ventilation                                |")
+    print("|         ... stop  : Stop autonomous ventilation                               |")
     print("| ______________________________________________________________________________|")
 
 
@@ -93,6 +93,7 @@ def execute(option):
 
 
 def start():
-    printMenu()
-    option = input("")
-    execute(option)
+    while True:
+        printMenu()
+        option = input("")
+        execute(option)

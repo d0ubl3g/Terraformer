@@ -1,5 +1,6 @@
 import argparse
 import logging
+import threading
 import time
 
 import schedule
@@ -7,7 +8,7 @@ from colorama import init, Fore, Style
 
 import Configuration
 from Control import Illumination, Extraction, Ventilation
-from Modules import Banner
+from Modules import Banner, Interactive
 from Sensors import Receiver
 from System import Cooling
 
@@ -19,6 +20,7 @@ logging.getLogger('schedule').setLevel(logging.WARNING)
 parser = argparse.ArgumentParser()
 parser.add_argument("-N", "--night", help="Start in Night mode", action="store_true")
 parser.add_argument("-R", "--receiver", help="RF Code Receiver mode", action="store_true")
+parser.add_argument("-D", "--daemon", help="Run in daemon mode. No Interactive console.", action="store_true")
 args = parser.parse_args()
 
 Banner.printBanner()
@@ -51,6 +53,8 @@ if Configuration.CONFIGURATION_SET:
         Ventilation.scheduleAuto()
     else:
         logging.error("[NOT IMPLEMENTED] Vent Schedule Cycle")
+    if not args.daemon:
+        threading.Thread(target=Interactive.start).start()
     while True:
         schedule.run_pending()
         time.sleep(1)
