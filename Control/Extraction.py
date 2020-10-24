@@ -10,17 +10,23 @@ from Sensors import Receiver
 EXTRACTION_ON = False
 EXTRACTION_IN_CYCLE = False
 
+AUTO_SCHEDULED = True
+
 
 def scheduleAuto():
-    schedule.every(int(Configuration.EXT_AUTO_FREQ)).seconds.do(autoAdjust)
+    schedule.every(int(Configuration.EXT_AUTO_FREQ)).seconds.do(autoAdjust).tag('extraction-auto')
     scheduleCycle(int(Configuration.EXT_CYCLE_EVERY))
     logging.info("Auto Extraction scheduled every " + Configuration.EXT_AUTO_FREQ + " seconds.")
     logging.info("Extraction cycles scheduled every " + Configuration.EXT_CYCLE_EVERY + " seconds for " +
                  Configuration.EXT_CYCLE_DURATION + " seconds.")
 
+def reScheduleAuto():
+    if not AUTO_SCHEDULED:
+        schedule.every(int(Configuration.EXT_AUTO_FREQ)).seconds.do(autoAdjust).tag('extraction-auto')
+
 
 def scheduleCycle(e):
-    schedule.every(e).seconds.do(cycleON)
+    schedule.every(e).seconds.do(cycleON).tag('extraction-cycle')
 
 
 def cycleON():

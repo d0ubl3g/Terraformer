@@ -9,8 +9,8 @@ ILLU_ON = False
 
 
 def scheduleHours():
-    schedule.every().day.at(Configuration.ILLU_START_HOUR).do(turnON)
-    schedule.every().day.at(Configuration.ILLU_STOP_HOUR).do(turnOFF)
+    schedule.every().day.at(Configuration.ILLU_START_HOUR).do(turnON).tag('illumonation-on')
+    schedule.every().day.at(Configuration.ILLU_STOP_HOUR).do(turnOFF).tag('illumination-off')
     logging.info("Illumination scheduled: " + Configuration.ILLU_START_HOUR + " to " + Configuration.ILLU_STOP_HOUR)
 
 

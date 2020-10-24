@@ -10,17 +10,24 @@ from Sensors import Receiver
 VENTILATION_ON = False
 VENTILATION_IN_CYCLE = False
 
+AUTO_SCHEDULED = True
+
 
 def scheduleAuto():
-    schedule.every(int(Configuration.VENT_AUTO_FREQ)).seconds.do(autoAdjust)
+    schedule.every(int(Configuration.VENT_AUTO_FREQ)).seconds.do(autoAdjust).tag('ventilation-auto')
     scheduleCycle(int(Configuration.VENT_CYCLE_EVERY), int(Configuration.VENT_CYCLE_DURATION))
     logging.info("Auto Ventilation scheduled every " + Configuration.VENT_AUTO_FREQ + " seconds.")
     logging.info("Ventilation cycles scheduled every " + Configuration.VENT_CYCLE_EVERY + " seconds for " +
                  Configuration.VENT_CYCLE_DURATION + " seconds.")
 
 
+def reScheduleAuto():
+    if not AUTO_SCHEDULED:
+        schedule.every(int(Configuration.VENT_AUTO_FREQ)).seconds.do(autoAdjust).tag('ventilation-auto')
+
+
 def scheduleCycle(e, d):
-    schedule.every(e).seconds.do(cycleON)
+    schedule.every(e).seconds.do(cycleON).tag('ventilation-cycle')
 
 
 def cycleON():
