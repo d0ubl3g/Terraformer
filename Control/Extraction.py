@@ -47,12 +47,16 @@ def cycleOFF():
 
 
 def turnON():
+    global EXTRACTION_ON
     RCTransmitter.sendCommand(RCTransmitter.EXTRACTION_ON)
+    EXTRACTION_ON = True
     logging.info("Extraction turned on.")
 
 
 def turnOFF():
+    global EXTRACTION_ON
     RCTransmitter.sendCommand(RCTransmitter.EXTRACTION_OFF)
+    EXTRACTION_ON = False
     logging.info("Extraction turned off.")
 
 

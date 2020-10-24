@@ -47,12 +47,16 @@ def cycleOFF():
 
 
 def turnON():
+    global VENTILATION_ON
     RCTransmitter.sendCommand(RCTransmitter.VENTILATION_ON)
+    VENTILATION_ON = True
     logging.info("Ventilation turned on.")
 
 
 def turnOFF():
+    global VENTILATION_ON
     RCTransmitter.sendCommand(RCTransmitter.VENTILATION_OFF)
+    VENTILATION_ON = False
     logging.info("Ventilation turned off.")
 
 

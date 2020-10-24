@@ -3,6 +3,7 @@ import subprocess
 import schedule
 from colorama import Fore, Style
 
+import Configuration
 from Control import Extraction, Illumination, Ventilation
 from Sensors import Receiver
 
@@ -32,11 +33,21 @@ def printMenu():
     print(Style.RESET_ALL)
 
 
+def boolToOn(b):
+    if b:
+        return Style.BRIGHT + Fore.GREEN + "On" + Style.RESET_ALL
+    else:
+        return Style.BRIGHT + Fore.RED + "Off" + Style.RESET_ALL
+
+
 def printStatus():
     if Receiver.TEMP != "0.0" and Receiver.HUM != "0.0":
         print(Style.BRIGHT + Fore.LIGHTBLUE_EX)
         print("-------------- GROW ENVIRONMENT STATUS --------------")
         print("|       Temperature: " + Receiver.TEMP + "ºC     Humidity: " + Receiver.HUM + "%     |")
+        print("|   Extraction: " + boolToOn(Extraction.EXTRACTION_ON) + "     Ventilation: " + boolToOn(
+            Ventilation.VENTILATION_ON) + "       |")
+        print("|             Illumination: " + boolToOn(Configuration.DAY) + "                         |")
         print("-----------------------------------------------------")
         print(Style.RESET_ALL)
     else:
@@ -46,6 +57,9 @@ def printStatus():
 def extractionStart():
     Extraction.turnON()
     print(Style.BRIGHT + Fore.GREEN + "\nExtraction system turned on.\n" + Style.RESET_ALL)
+
+
+r
 
 
 def extractionStop():
