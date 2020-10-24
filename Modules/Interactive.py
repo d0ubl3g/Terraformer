@@ -1,3 +1,5 @@
+import subprocess
+
 import schedule
 from colorama import Fore, Style
 
@@ -7,7 +9,7 @@ from Sensors import Receiver
 
 def printMenu():
     print(Style.BRIGHT)
-    print("------------------------------ TERRAFORMER CONTROL ------------------------------")
+    print(" _____________________________ TERRAFORMER CONTROL _____________________________")
     print("| help : Print this menu                                                        |")
     print("| status : Print environment status (Temp, Hum, etc.)                           |")
     print("| extraction : Print extraction system status.                                  |")
@@ -25,7 +27,9 @@ def printMenu():
     print("|     ... auto  : Print autonomous ventilation status                           |")
     print("|         ... start : Start autonomous ventilation system.                      |")
     print("|         ... stop  : Stop autonomous ventilation                               |")
-    print("| ______________________________________________________________________________|")
+    print("| log : Print real time logging                                                 |")
+    print("| _____________________________________________________________________________ |")
+    print(Style.RESET_ALL)
 
 
 def printStatus():
@@ -36,59 +40,63 @@ def printStatus():
         print("-----------------------------------------------------")
         print(Style.RESET_ALL)
     else:
-        print(Fore.MAGENTA + "Sensors not initialized. Wait few seconds." + Style.RESET_ALL)
+        print(Fore.MAGENTA + "\nSensors not initialized. Wait few seconds.\n" + Style.RESET_ALL)
 
 
 def extractionStart():
     Extraction.turnON()
-    print(Style.BRIGHT + Fore.GREEN + "Extraction system turned on." + Style.RESET_ALL)
+    print(Style.BRIGHT + Fore.GREEN + "\nExtraction system turned on.\n" + Style.RESET_ALL)
 
 
 def extractionStop():
     Extraction.turnOFF()
-    print(Style.BRIGHT + Fore.RED + "Extraction system turned off." + Style.RESET_ALL)
+    print(Style.BRIGHT + Fore.RED + "\nExtraction system turned off.\n" + Style.RESET_ALL)
 
 
 def extractionAutoStart():
     Extraction.reScheduleAuto()
-    print(Style.BRIGHT + Fore.GREEN + "Extraction autonomous system scheduled." + Style.RESET_ALL)
+    print(Style.BRIGHT + Fore.GREEN + "\nExtraction autonomous system scheduled.\n" + Style.RESET_ALL)
 
 
 def extractionAutoStop():
     schedule.clear('extraction-auto')
     Extraction.AUTO_SCHEDULED = False
-    print(Style.BRIGHT + Fore.RED + "Extraction autonomous system unscheduled." + Style.RESET_ALL)
+    print(Style.BRIGHT + Fore.RED + "\nExtraction autonomous system unscheduled.\n" + Style.RESET_ALL)
 
 
 def illuminationStart():
     Illumination.turnON()
-    print(Style.BRIGHT + Fore.GREEN + "Illumination turned on." + Style.RESET_ALL)
+    print(Style.BRIGHT + Fore.GREEN + "\nIllumination turned on.\n" + Style.RESET_ALL)
 
 
 def illuminationStop():
     Illumination.turnOFF()
-    print(Style.BRIGHT + Fore.RED + "Illumination turned off." + Style.RESET_ALL)
+    print(Style.BRIGHT + Fore.RED + "\nIllumination turned off.\n" + Style.RESET_ALL)
 
 
 def ventilationStart():
     Ventilation.turnON()
-    print(Style.BRIGHT + Fore.GREEN + "Ventilation system turned on." + Style.RESET_ALL)
+    print(Style.BRIGHT + Fore.GREEN + "\nVentilation system turned on.\n" + Style.RESET_ALL)
 
 
 def ventilationStop():
     Ventilation.turnOFF()
-    print(Style.BRIGHT + Fore.RED + "Ventilation system turned on." + Style.RESET_ALL)
+    print(Style.BRIGHT + Fore.RED + "\nVentilation system turned on.\n" + Style.RESET_ALL)
 
 
 def ventilationAutoStart():
     Ventilation.reScheduleAuto()
-    print(Style.BRIGHT + Fore.GREEN + "Ventilation autonomous system scheduled." + Style.RESET_ALL)
+    print(Style.BRIGHT + Fore.GREEN + "\nVentilation autonomous system scheduled.\n" + Style.RESET_ALL)
 
 
 def ventilationAutoStop():
     schedule.clear('ventilation-auto')
     Ventilation.AUTO_SCHEDULED = False
-    print(Style.BRIGHT + Fore.RED + "Ventilation autonomous system unscheduled." + Style.RESET_ALL)
+    print(Style.BRIGHT + Fore.RED + "\nVentilation autonomous system unscheduled.\n" + Style.RESET_ALL)
+
+
+def printLog():
+    subprocess.run(["tail", "-f", "/opt/Terraformer/terraformer.log"])
 
 
 def execute(option):
@@ -104,7 +112,8 @@ def execute(option):
         "ventilation start": ventilationStart,
         "ventilation stop": ventilationStop,
         "ventilation auto start": ventilationAutoStart,
-        "ventilation auto stop": ventilationAutoStop
+        "ventilation auto stop": ventilationAutoStop,
+        "log": printLog
     }
     func = switcher.get(option)
     func()
@@ -114,7 +123,7 @@ def start():
     printMenu()
     while True:
         try:
-            option = input("=> " + Style.RESET_ALL)
+            option = input(Style.BRIGHT + "=> " + Style.RESET_ALL)
             execute(option)
         except Exception as e:
             print(Fore.RED + "\nInvalid option. Try with \"help\" \n" + Style.RESET_ALL)
