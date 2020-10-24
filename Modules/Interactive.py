@@ -29,10 +29,10 @@ def printMenu():
 
 
 def printStatus():
-    if Receiver.TEMP != 0.0 and Receiver.HUM != 0.0:
+    if Receiver.TEMP != "0.0" and Receiver.HUM != "0.0":
         print(Style.BRIGHT + Fore.LIGHTBLUE_EX)
         print("-------------- GROW ENVIRONMENT STATUS --------------")
-        print("|       Temperature: " + str(Receiver.TEMP) + "     Humidity: " + str(Receiver.HUM + "%") + "    |")
+        print("|       Temperature: " + Receiver.TEMP + "ºC     Humidity: " + Receiver.HUM + "%    |")
         print("|---------------------------------------------------|")
         print(Style.RESET_ALL)
     else:
