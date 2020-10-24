@@ -29,11 +29,14 @@ def printMenu():
 
 
 def printStatus():
-    print(Style.BRIGHT + Fore.LIGHTBLUE_EX)
-    print("-------------- GROW ENVIRONMENT STATUS --------------")
-    print("|       Temperature: " + str(Receiver.TEMP) + "     Humidity: " + str(Receiver.HUM + "%") + "          |")
-    print("|---------------------------------------------------|")
-    print(Style.RESET_ALL)
+    if Receiver.TEMP != 0.0 and Receiver.HUM != 0.0:
+        print(Style.BRIGHT + Fore.LIGHTBLUE_EX)
+        print("-------------- GROW ENVIRONMENT STATUS --------------")
+        print("|       Temperature: " + str(Receiver.TEMP) + "     Humidity: " + str(Receiver.HUM + "%") + "    |")
+        print("|---------------------------------------------------|")
+        print(Style.RESET_ALL)
+    else:
+        print(Fore.MAGENTA + "Sensors not initialized. Wait few seconds.")
 
 
 def extractionStart():
@@ -114,4 +117,4 @@ def start():
             option = input("=> " + Style.RESET_ALL)
             execute(option)
         except Exception as e:
-            print(Fore.RED + "Invalid option." + Style.RESET_ALL)
+            print(Fore.RED + "\n Invalid option. Try with \"help\"" + Style.RESET_ALL)
