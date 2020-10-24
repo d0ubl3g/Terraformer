@@ -59,9 +59,6 @@ def extractionStart():
     print(Style.BRIGHT + Fore.GREEN + "\nExtraction system turned on.\n" + Style.RESET_ALL)
 
 
-r
-
-
 def extractionStop():
     Extraction.turnOFF()
     print(Style.BRIGHT + Fore.RED + "\nExtraction system turned off.\n" + Style.RESET_ALL)
