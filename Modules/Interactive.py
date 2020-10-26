@@ -10,7 +10,8 @@ from Sensors import Receiver
 
 def printMenu():
     print(Style.BRIGHT)
-    print(" _____________________________ TERRAFORMER CONTROL _____________________________")
+    print(" ___________________________.: TERRAFORMER CONTROL :.___________________________")
+    print("|                                                                               |")
     print("| help : Print this menu                                                        |")
     print("| status : Print environment status (Temp, Hum, etc.)                           |")
     print("| extraction : Print extraction system status.                                  |")
@@ -40,20 +41,68 @@ def boolToOn(b):
         return Style.BRIGHT + Fore.RED + "Off" + Style.RESET_ALL
 
 
+def tempToColor(temp):
+    t = float(temp)
+    if Configuration.DAY:
+        if t >= Configuration.MAX_DAY_TEMP:
+            return Style.BRIGHT + Fore.RED + temp + Style.RESET_ALL
+        elif t >= (float(Configuration.MAX_DAY_TEMP) - 1):
+            return Style.BRIGHT + Fore.LIGHTRED_EX + temp + Style.RESET_ALL
+        elif Configuration.MIN_DAY_TEMP < t < Configuration.MAX_DAY_TEMP:
+            return Style.BRIGHT + Fore.GREEN + temp + Style.RESET_ALL
+        elif t <= Configuration.MIN_DAY_TEMP:
+            return Style.BRIGHT + Fore.LIGHTBLUE_EX + temp + Style.RESET_ALL
+    else:
+        if t >= Configuration.MAX_NIGHT_TEMP:
+            return Style.BRIGHT + Fore.RED + temp + Style.RESET_ALL
+        elif t >= (float(Configuration.MAX_NIGHT_TEMP) - 1):
+            return Style.BRIGHT + Fore.LIGHTRED_EX + temp + Style.RESET_ALL
+        elif Configuration.MIN_NIGTH_TEMP < t < Configuration.MAX_NIGHT_TEMP:
+            return Style.BRIGHT + Fore.GREEN + temp + Style.RESET_ALL
+        elif t <= Configuration.MIN_NIGHT_TEMP_TEMP:
+            return Style.BRIGHT + Fore.LIGHTBLUE_EX + temp + Style.RESET_ALL
+
+
+def humToColor(hum):
+    h = float(hum)
+    if Configuration.DAY:
+        if h >= Configuration.MAX_DAY_HUM:
+            return Style.BRIGHT + Fore.RED + hum + Style.RESET_ALL
+        elif h >= (float(Configuration.MAX_DAY_HUM) - 1):
+            return Style.BRIGHT + Fore.LIGHTRED_EX + hum + Style.RESET_ALL
+        elif Configuration.MIN_DAY_HUM < h < Configuration.MAX_DAY_HUM:
+            return Style.BRIGHT + Fore.GREEN + hum + Style.RESET_ALL
+        elif h <= Configuration.MIN_DAY_HUM:
+            return Style.BRIGHT + Fore.LIGHTBLUE_EX + hum + Style.RESET_ALL
+    else:
+        if h >= Configuration.MAX_NIGHT_HUM:
+            return Style.BRIGHT + Fore.RED + hum + Style.RESET_ALL
+        elif h >= (float(Configuration.MAX_NIGHT_HUM) - 1):
+            return Style.BRIGHT + Fore.LIGHTRED_EX + hum + Style.RESET_ALL
+        elif Configuration.MIN_NIGHT_HUM < h < Configuration.MAX_NIGHT_HUM:
+            return Style.BRIGHT + Fore.GREEN + hum + Style.RESET_ALL
+        elif h <= Configuration.MIN_NIGHT_HUM:
+            return Style.BRIGHT + Fore.LIGHTBLUE_EX + hum + Style.RESET_ALL
+
+
 def printStatus():
     if Receiver.TEMP != "0.0" and Receiver.HUM != "0.0":
         print(Style.BRIGHT + Fore.LIGHTBLUE_EX)
         print("-------------- GROW ENVIRONMENT STATUS --------------")
-        print("|       Temperature: " + Receiver.TEMP + "ºC     Humidity: " + Receiver.HUM + "%     |")
-        print("|   Extraction: " + boolToOn(
+        print()
+        print("       Temperature: " + tempToColor(
+            Receiver.TEMP) + Style.BRIGHT + Fore.LIGHTBLUE_EX + "ºC     Humidity: " + humToColor(
+            Receiver.HUM) + Style.BRIGHT + Fore.LIGHTBLUE_EX + "%     ")
+        print("             Extraction: " + boolToOn(
             Extraction.EXTRACTION_ON) + Style.BRIGHT + Fore.LIGHTBLUE_EX + "     Ventilation: " + boolToOn(
-            Ventilation.VENTILATION_ON) + Style.BRIGHT + Fore.LIGHTBLUE_EX + "           |")
+            Ventilation.VENTILATION_ON) + Style.BRIGHT + Fore.LIGHTBLUE_EX + "           ")
         print("|             Illumination: " + boolToOn(
             Configuration.DAY) + Style.BRIGHT + Fore.LIGHTBLUE_EX + "                      |")
+        print()
         print("-----------------------------------------------------")
         print(Style.RESET_ALL)
     else:
-        print(Fore.MAGENTA + "\nSensors not initialized. Wait few seconds.\n" + Style.RESET_ALL)
+        print(Style.BRIGHT + Fore.MAGENTA + "\nSensors not initialized. Wait few seconds.\n" + Style.RESET_ALL)
 
 
 def extractionStart():
@@ -109,6 +158,7 @@ def ventilationAutoStop():
 
 
 def printLog():
+    # TODO: Correct function exit
     subprocess.run(["tail", "-f", "/opt/Terraformer/terraformer.log"])
 
 
