@@ -1,3 +1,4 @@
+import logging
 import subprocess
 
 import schedule
@@ -190,3 +191,4 @@ def start():
             execute(option)
         except Exception as e:
             print(Fore.RED + "\nInvalid option. Try with \"help\" \n" + Style.RESET_ALL)
+            logging.error(e)
