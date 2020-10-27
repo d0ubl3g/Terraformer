@@ -14,16 +14,16 @@ AUTO_SCHEDULED = True
 
 
 def scheduleAuto():
-    schedule.every(int(Configuration.EXT_AUTO_FREQ)).seconds.do(autoAdjust).tag('extraction-auto')
-    scheduleCycle(int(Configuration.EXT_CYCLE_EVERY))
-    logging.info("Auto Extraction scheduled every " + Configuration.EXT_AUTO_FREQ + " seconds.")
-    logging.info("Extraction cycles scheduled every " + Configuration.EXT_CYCLE_EVERY + " seconds for " +
-                 Configuration.EXT_CYCLE_DURATION + " seconds.")
+    schedule.every(Configuration.EXT_AUTO_FREQ).seconds.do(autoAdjust).tag('extraction-auto')
+    scheduleCycle(Configuration.EXT_CYCLE_EVERY)
+    logging.info("Auto Extraction scheduled every " + str(Configuration.EXT_AUTO_FREQ) + " seconds.")
+    logging.info("Extraction cycles scheduled every " + str(Configuration.EXT_CYCLE_EVERY) + " seconds for " +
+                 str(Configuration.EXT_CYCLE_DURATION) + " seconds.")
 
 
 def reScheduleAuto():
     if not AUTO_SCHEDULED:
-        schedule.every(int(Configuration.EXT_AUTO_FREQ)).seconds.do(autoAdjust).tag('extraction-auto')
+        schedule.every(Configuration.EXT_AUTO_FREQ).seconds.do(autoAdjust).tag('extraction-auto')
 
 
 def scheduleCycle(e):
