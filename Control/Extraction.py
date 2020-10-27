@@ -62,13 +62,13 @@ def turnOFF():
 
 def autoAdjust():
     if Configuration.DAY:
-        if Receiver.TEMP >= Configuration.MAX_DAY_TEMP or Receiver.HUM >= Configuration.MAX_DAY_HUM:
+        if float(Receiver.TEMP) >= Configuration.MAX_DAY_TEMP or float(Receiver.HUM) >= Configuration.MAX_DAY_HUM:
             turnON()
         else:
             if not EXTRACTION_IN_CYCLE:
                 turnOFF()
     else:
-        if Receiver.TEMP >= Configuration.MAX_NIGHT_TEMP or Receiver.HUM >= Configuration.MAX_NIGHT_HUM:
+        if float(Receiver.TEMP) >= Configuration.MAX_NIGHT_TEMP or float(Receiver.HUM) >= Configuration.MAX_NIGHT_HUM:
             turnON()
         else:
             if not EXTRACTION_IN_CYCLE:
