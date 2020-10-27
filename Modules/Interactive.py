@@ -48,7 +48,7 @@ def tempToColor(temp):
         if t >= Configuration.MAX_DAY_TEMP:
             return Style.BRIGHT + Fore.RED + temp + Style.RESET_ALL
         elif t >= (float(Configuration.MAX_DAY_TEMP) - 1):
-            return Style.BRIGHT + Fore.LIGHTRED_EX + temp + Style.RESET_ALL
+            return Style.BRIGHT + Fore.YELLOW + temp + Style.RESET_ALL
         elif Configuration.MIN_DAY_TEMP < t < Configuration.MAX_DAY_TEMP:
             return Style.BRIGHT + Fore.GREEN + temp + Style.RESET_ALL
         elif t <= Configuration.MIN_DAY_TEMP:
@@ -57,7 +57,7 @@ def tempToColor(temp):
         if t >= Configuration.MAX_NIGHT_TEMP:
             return Style.BRIGHT + Fore.RED + temp + Style.RESET_ALL
         elif t >= (float(Configuration.MAX_NIGHT_TEMP) - 1):
-            return Style.BRIGHT + Fore.LIGHTRED_EX + temp + Style.RESET_ALL
+            return Style.BRIGHT + Fore.YELLOW + temp + Style.RESET_ALL
         elif Configuration.MIN_NIGTH_TEMP < t < Configuration.MAX_NIGHT_TEMP:
             return Style.BRIGHT + Fore.GREEN + temp + Style.RESET_ALL
         elif t <= Configuration.MIN_NIGHT_TEMP_TEMP:
@@ -94,11 +94,11 @@ def printStatus():
         print("       Temperature: " + tempToColor(
             Receiver.TEMP) + Style.BRIGHT + Fore.LIGHTBLUE_EX + "ºC     Humidity: " + humToColor(
             Receiver.HUM) + Style.BRIGHT + Fore.LIGHTBLUE_EX + "%     ")
-        print("             Extraction: " + boolToOn(
+        print("         Extraction: " + boolToOn(
             Extraction.EXTRACTION_ON) + Style.BRIGHT + Fore.LIGHTBLUE_EX + "     Ventilation: " + boolToOn(
             Ventilation.VENTILATION_ON) + Style.BRIGHT + Fore.LIGHTBLUE_EX + "           ")
-        print("|             Illumination: " + boolToOn(
-            Configuration.DAY) + Style.BRIGHT + Fore.LIGHTBLUE_EX + "                      |")
+        print("             Illumination: " + boolToOn(
+            Configuration.DAY) + Style.BRIGHT + Fore.LIGHTBLUE_EX + "                      ")
         print()
         print("-----------------------------------------------------")
         print(Style.RESET_ALL)
