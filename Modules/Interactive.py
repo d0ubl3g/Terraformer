@@ -91,13 +91,13 @@ def printStatus():
         print(Style.BRIGHT + Fore.LIGHTBLUE_EX)
         print("-------------- GROW ENVIRONMENT STATUS --------------")
         print()
-        print("       Temperature: " + tempToColor(
-            Receiver.TEMP) + Style.BRIGHT + Fore.LIGHTBLUE_EX + "ºC     Humidity: " + humToColor(
+        print("\t\tTemperature: " + tempToColor(
+            Receiver.TEMP) + Style.BRIGHT + Fore.LIGHTBLUE_EX + "ºC\tHumidity: " + humToColor(
             Receiver.HUM) + Style.BRIGHT + Fore.LIGHTBLUE_EX + "%     ")
-        print("         Extraction: " + boolToOn(
-            Extraction.EXTRACTION_ON) + Style.BRIGHT + Fore.LIGHTBLUE_EX + "     Ventilation: " + boolToOn(
+        print("\t\tExtraction: " + boolToOn(
+            Extraction.EXTRACTION_ON) + Style.BRIGHT + Fore.LIGHTBLUE_EX + "\tVentilation: " + boolToOn(
             Ventilation.VENTILATION_ON) + Style.BRIGHT + Fore.LIGHTBLUE_EX + "           ")
-        print("             Illumination: " + boolToOn(
+        print("\t\t\tIllumination: " + boolToOn(
             Configuration.DAY) + Style.BRIGHT + Fore.LIGHTBLUE_EX + "                      ")
         print()
         print("-----------------------------------------------------")
