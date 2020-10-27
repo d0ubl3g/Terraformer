@@ -58,9 +58,9 @@ def tempToColor(temp):
             return Style.BRIGHT + Fore.RED + temp + Style.RESET_ALL
         elif t >= (float(Configuration.MAX_NIGHT_TEMP) - 1):
             return Style.BRIGHT + Fore.YELLOW + temp + Style.RESET_ALL
-        elif Configuration.MIN_NIGTH_TEMP < t < Configuration.MAX_NIGHT_TEMP:
+        elif Configuration.MIN_NIGHT_TEMP < t < Configuration.MAX_NIGHT_TEMP:
             return Style.BRIGHT + Fore.GREEN + temp + Style.RESET_ALL
-        elif t <= Configuration.MIN_NIGHT_TEMP_TEMP:
+        elif t <= Configuration.MIN_NIGHT_TEMP:
             return Style.BRIGHT + Fore.LIGHTBLUE_EX + temp + Style.RESET_ALL
 
 
@@ -91,13 +91,13 @@ def printStatus():
         print(Style.BRIGHT + Fore.LIGHTBLUE_EX)
         print("-------------- GROW ENVIRONMENT STATUS --------------")
         print()
-        print("\t\t Temperature: " + tempToColor(
+        print("\t Temperature: " + tempToColor(
             Receiver.TEMP) + Style.BRIGHT + Fore.LIGHTBLUE_EX + "ºC \t Humidity: " + humToColor(
             Receiver.HUM) + Style.BRIGHT + Fore.LIGHTBLUE_EX + "%     ")
-        print("\t\t Extraction: " + boolToOn(
+        print("\t Extraction: " + boolToOn(
             Extraction.EXTRACTION_ON) + Style.BRIGHT + Fore.LIGHTBLUE_EX + " \t Ventilation: " + boolToOn(
             Ventilation.VENTILATION_ON) + Style.BRIGHT + Fore.LIGHTBLUE_EX + "           ")
-        print("\t\t\t Illumination: " + boolToOn(
+        print("\t\t Illumination: " + boolToOn(
             Configuration.DAY) + Style.BRIGHT + Fore.LIGHTBLUE_EX + "                      ")
         print()
         print("-----------------------------------------------------")
