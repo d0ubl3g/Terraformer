@@ -2,22 +2,20 @@ import configparser
 import datetime
 import logging
 import os
+import json
 
 from colorama import Style, Fore
 from elasticsearch import Elasticsearch
 
 working_directory = os.path.dirname(os.path.abspath(__file__))
 
-config = configparser.ConfigParser()
-config.read(working_directory + '/elastic.conf')
-
-# DEFAULT #
-default = config['DEFAULT']
-ENDPOINT = default['Endpoint']
-PORT = int(default['Port'])
-TLS = bool(default['TLS'])
-USERNAME = default['Username']
-PASSWORD = default['Password']
+with open(working_directory + '/elastic.json') as e:
+    data = json.load(e)
+    ENDPOINT = data['Endpoint']
+    PORT = int(data['Port'])
+    TLS = bool(data['TLS'])
+    USERNAME = data['Username']
+    PASSWORD = data['Password']
 ENV_INDEX = "env-{}"
 EVENT_INDEX = "events-{}"
 
