@@ -12,6 +12,9 @@ from Modules import Banner, Interactive
 from Sensors import Receiver
 from System import Cooling
 
+if Configuration.ELASTIC:
+    from Comm import Elastic
+
 init()
 logging.basicConfig(format='%(asctime)s %(levelname)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p',
                     filename='terraformer.log', level=logging.DEBUG, filemode='w')
@@ -31,6 +34,8 @@ if args.night:
     Configuration.DAY = False
 if Configuration.CONFIGURATION_SET:
     logging.info("Configuration loaded successfully.")
+    if Configuration.ELASTIC:
+        Elastic.initialize()
     if Configuration.ENV_PHASE == "veg":
         logging.info("Vegetative phase configured.")
     elif Configuration.ENV_PHASE == "flow":
