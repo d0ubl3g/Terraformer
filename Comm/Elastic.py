@@ -9,7 +9,7 @@ from elasticsearch import Elasticsearch
 working_directory = os.path.dirname(os.path.abspath(__file__))
 
 config = configparser.ConfigParser()
-config.read(working_directory + '/elastic.config')
+config.read(working_directory + '/elastic.conf')
 
 # DEFAULT #
 default = config['ELASTIC']
