@@ -1,9 +1,10 @@
-from elasticsearch import Elasticsearch
 import configparser
-import os
-import logging
 import datetime
+import logging
+import os
+
 from colorama import Style, Fore
+from elasticsearch import Elasticsearch
 
 working_directory = os.path.dirname(os.path.abspath(__file__))
 
@@ -53,7 +54,8 @@ def saveEnv(temp, hum):
 def saveEvent(control, type, msg):
     today = datetime.date.today()
     date_index = today.strftime('%d-%m-%Y')
-    elastic.index(index=EVENT_INDEX.format(date_index), body={"control": control, "type": type, "msg": msg, "timestamp": today})
+    elastic.index(index=EVENT_INDEX.format(date_index),
+                  body={"control": control, "type": type, "msg": msg, "timestamp": today})
 
 
 elastic = initialize()

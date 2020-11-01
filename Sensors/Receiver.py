@@ -2,6 +2,7 @@ import logging
 
 import Adafruit_DHT
 import schedule
+
 import Configuration
 
 if Configuration.ELASTIC:

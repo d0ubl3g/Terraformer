@@ -1,3 +1,4 @@
+import datetime
 import logging
 import subprocess
 
@@ -90,6 +91,8 @@ def printStatus():
     if Receiver.TEMP != "0.0" and Receiver.HUM != "0.0":
         print(Style.BRIGHT + Fore.LIGHTBLUE_EX)
         print("-------------- GROW ENVIRONMENT STATUS --------------")
+        print()
+        print(datetime.date.today())
         print()
         print("\t Temperature: " + tempToColor(
             Receiver.TEMP) + Style.BRIGHT + Fore.LIGHTBLUE_EX + "ºC \t Humidity: " + humToColor(
