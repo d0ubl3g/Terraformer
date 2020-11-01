@@ -24,15 +24,13 @@ def initialize():
     try:
         if TLS:
             es = Elasticsearch(
-                ENDPOINT,
-                http_auth=(USERNAME, PASSWORD),
+                hosts=ENDPOINT.format(USERNAME, PASSWORD),
                 scheme="https",
                 port=PORT,
             )
         else:
             es = Elasticsearch(
-                ENDPOINT,
-                http_auth=(USERNAME, PASSWORD),
+                hosts=ENDPOINT.format(USERNAME, PASSWORD),
                 scheme="http",
                 port=PORT,
             )
