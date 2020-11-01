@@ -12,7 +12,7 @@ config = configparser.ConfigParser()
 config.read(working_directory + '/elastic.conf')
 
 # DEFAULT #
-default = config['ELASTIC']
+default = config['DEFAULT']
 ENDPOINT = default['Endpoint']
 PORT = int(default['Port'])
 TLS = bool(default['TLS'])
