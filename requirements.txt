@@ -2,3 +2,4 @@ schedule
 colorama
 Adafruit_DHT
 rpi-rf
+elasticsearch

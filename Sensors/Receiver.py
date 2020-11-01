@@ -2,6 +2,10 @@ import logging
 
 import Adafruit_DHT
 import schedule
+import Configuration
+
+if Configuration.ELASTIC:
+    from Comm import Elastic
 
 import Configuration
 
@@ -22,6 +26,8 @@ def getTempHum():
         TEMP = "{0:0.1f}".format(temperature)
         HUM = "{0:0.1f}".format(humidity)
         logging.debug("Temperature: " + TEMP + "ºC " + "Humidity: " + HUM + "%")
+        if Configuration.ELASTIC:
+            Elastic.saveEnv(TEMP, HUM)
         return value
     else:
         logging.error("Error receiving data from sensor.")

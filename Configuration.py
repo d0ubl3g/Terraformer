@@ -11,6 +11,7 @@ default = config['DEFAULT']
 CONFIGURATION_SET = bool(default['Configured'])
 PASSWORD = default['Password']
 MAX_CPU_TEMP = float(default['MaxCPUTemp'])
+ELASTIC = bool(default['Elastic'])
 
 # ENVIRONMENT #
 environment = config['ENVIRONMENT']

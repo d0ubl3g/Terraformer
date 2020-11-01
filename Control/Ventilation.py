@@ -7,6 +7,9 @@ import Configuration
 from Comm import RCTransmitter
 from Sensors import Receiver
 
+if Configuration.ELASTIC:
+    from Comm import Elastic
+
 VENTILATION_ON = False
 VENTILATION_IN_CYCLE = False
 
@@ -51,6 +54,8 @@ def turnON():
     RCTransmitter.sendCommand(RCTransmitter.VENTILATION_ON)
     VENTILATION_ON = True
     logging.info("Ventilation turned on.")
+    if Configuration.ELASTIC:
+        Elastic.saveEvent("Ventilation", "On", "Ventilation turned on.")
 
 
 def turnOFF():
@@ -58,6 +63,8 @@ def turnOFF():
     RCTransmitter.sendCommand(RCTransmitter.VENTILATION_OFF)
     VENTILATION_ON = False
     logging.info("Ventilation turned off.")
+    if Configuration.ELASTIC:
+        Elastic.saveEvent("Ventilation", "Off", "Ventilation turned off.")
 
 
 def autoAdjust():

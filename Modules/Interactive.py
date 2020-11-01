@@ -69,7 +69,7 @@ def humToColor(hum):
     if Configuration.DAY:
         if h >= Configuration.MAX_DAY_HUM:
             return Style.BRIGHT + Fore.RED + hum + Style.RESET_ALL
-        elif h >= (float(Configuration.MAX_DAY_HUM) - 1):
+        elif h >= (float(Configuration.MAX_DAY_HUM) - 2.5):
             return Style.BRIGHT + Fore.LIGHTRED_EX + hum + Style.RESET_ALL
         elif Configuration.MIN_DAY_HUM < h < Configuration.MAX_DAY_HUM:
             return Style.BRIGHT + Fore.GREEN + hum + Style.RESET_ALL
@@ -78,7 +78,7 @@ def humToColor(hum):
     else:
         if h >= Configuration.MAX_NIGHT_HUM:
             return Style.BRIGHT + Fore.RED + hum + Style.RESET_ALL
-        elif h >= (float(Configuration.MAX_NIGHT_HUM) - 1):
+        elif h >= (float(Configuration.MAX_NIGHT_HUM) - 2.5):
             return Style.BRIGHT + Fore.LIGHTRED_EX + hum + Style.RESET_ALL
         elif Configuration.MIN_NIGHT_HUM < h < Configuration.MAX_NIGHT_HUM:
             return Style.BRIGHT + Fore.GREEN + hum + Style.RESET_ALL

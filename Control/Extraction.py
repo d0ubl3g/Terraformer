@@ -7,6 +7,9 @@ import Configuration
 from Comm import RCTransmitter
 from Sensors import Receiver
 
+if Configuration.ELASTIC:
+    from Comm import Elastic
+
 EXTRACTION_ON = False
 EXTRACTION_IN_CYCLE = False
 
@@ -51,6 +54,8 @@ def turnON():
     RCTransmitter.sendCommand(RCTransmitter.EXTRACTION_ON)
     EXTRACTION_ON = True
     logging.info("Extraction turned on.")
+    if Configuration.ELASTIC:
+        Elastic.saveEvent("Extraction", "On", "Extraction turned off.")
 
 
 def turnOFF():
@@ -58,6 +63,8 @@ def turnOFF():
     RCTransmitter.sendCommand(RCTransmitter.EXTRACTION_OFF)
     EXTRACTION_ON = False
     logging.info("Extraction turned off.")
+    if Configuration.ELASTIC:
+        Elastic.saveEvent("Extraction", "Off", "Extraction turned off.")
 
 
 def autoAdjust():
