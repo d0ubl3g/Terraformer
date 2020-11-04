@@ -8,10 +8,10 @@ config.read(working_directory + '/Terraformer.conf')
 
 # DEFAULT #
 default = config['DEFAULT']
-CONFIGURATION_SET = bool(default['Configured'])
+CONFIGURATION_SET = default.getboolean('Configured')
 PASSWORD = default['Password']
 MAX_CPU_TEMP = float(default['MaxCPUTemp'])
-ELASTIC = bool(default['Elastic'])
+ELASTIC = default.getboolean('Elastic')
 
 # ENVIRONMENT #
 environment = config['ENVIRONMENT']
