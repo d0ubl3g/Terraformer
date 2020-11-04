@@ -61,7 +61,7 @@ def initialize():
 
 
 def prepareIndex(index, mapping):
-    elastic.create(index=index, body=mapping)
+    elastic.indices.create(index=index, body=mapping)
 
 
 def checkIndexExists(index):
