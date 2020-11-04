@@ -42,7 +42,7 @@ def initialize():
 
 def saveEnv(temp, hum):
     try:
-        today = datetime.date.today()
+        today = datetime.datetime.today()
         date_index = today.strftime('%d-%m-%Y')
         timestamp = today.strftime('%d-%m-%Y @ %H:%M:%S')
         elastic.index(index=ENV_INDEX.format(date_index), body={"temp": temp, "hum": hum, "timestamp": timestamp})
@@ -52,7 +52,7 @@ def saveEnv(temp, hum):
 
 def saveEvent(control, type, msg):
     try:
-        today = datetime.date.today()
+        today = datetime.datetime.today()
         date_index = today.strftime('%d-%m-%Y')
         timestamp = today.strftime('%d-%m-%Y @ %H:%M:%S')
         elastic.index(index=EVENT_INDEX.format(date_index),

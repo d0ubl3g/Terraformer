@@ -92,7 +92,7 @@ def printStatus():
         print(Style.BRIGHT + Fore.LIGHTBLUE_EX)
         print("-------------- GROW ENVIRONMENT STATUS --------------")
         print()
-        print("\t" + datetime.date.today().strftime('%d-%m-%Y @ %H:%M:%S'))
+        print("\t" + datetime.datetime.today().strftime('%d-%m-%Y @ %H:%M:%S'))
         print()
         print("\t Temperature: " + tempToColor(
             Receiver.TEMP) + Style.BRIGHT + Fore.LIGHTBLUE_EX + "ºC \t Humidity: " + humToColor(
