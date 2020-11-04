@@ -28,7 +28,7 @@ def getTempHum():
         HUM = "{0:0.1f}".format(humidity)
         logging.debug("Temperature: " + TEMP + "ºC " + "Humidity: " + HUM + "%")
         if Configuration.ELASTIC:
-            Elastic.saveEnv(TEMP, HUM)
+            Elastic.saveEnv(float(TEMP), float(HUM))
         return value
     else:
         logging.error("Error receiving data from sensor.")

@@ -11,11 +11,11 @@ working_directory = os.path.dirname(os.path.abspath(__file__))
 
 def strToBool(s):
     if s == 'True':
-         return True
+        return True
     elif s == 'False':
-         return False
+        return False
     else:
-         raise ValueError
+        return False
 
 
 with open(working_directory + '/elastic.json') as e:
