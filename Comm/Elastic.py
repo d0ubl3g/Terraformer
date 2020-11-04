@@ -44,7 +44,7 @@ def saveEnv(temp, hum):
     try:
         today = datetime.datetime.today()
         date_index = today.strftime('%d-%m-%Y')
-        timestamp = today.strftime('%d-%m-%Y %H:%M:%S')
+        timestamp = today.isoformat()
         elastic.index(index=ENV_INDEX.format(date_index), body={"temp": temp, "hum": hum, "timestamp": timestamp})
     except Exception as e:
         logging.error(str(e))
@@ -54,7 +54,7 @@ def saveEvent(control, type, msg):
     try:
         today = datetime.datetime.today()
         date_index = today.strftime('%d-%m-%Y')
-        timestamp = today.strftime('%d-%m-%Y %H:%M:%S')
+        timestamp = today.isoformat()
         elastic.index(index=EVENT_INDEX.format(date_index),
                       body={"control": control, "type": type, "msg": msg, "timestamp": timestamp})
     except Exception as e:
