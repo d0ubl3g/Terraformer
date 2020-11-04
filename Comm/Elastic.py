@@ -8,11 +8,21 @@ from elasticsearch import Elasticsearch
 
 working_directory = os.path.dirname(os.path.abspath(__file__))
 
+
+def strToBool(s):
+    if s == 'True':
+         return True
+    elif s == 'False':
+         return False
+    else:
+         raise ValueError
+
+
 with open(working_directory + '/elastic.json') as e:
     data = json.load(e)
     ENDPOINT = data['Endpoint']
     PORT = int(data['Port'])
-    TLS = bool(data['TLS'])
+    TLS = strToBool(data['TLS'])
     USERNAME = data['Username']
     PASSWORD = data['Password']
 ENV_INDEX = "env-{}"
