@@ -6,6 +6,16 @@ import os
 from colorama import Style, Fore
 from elasticsearch import Elasticsearch
 
+ENV_MAPPING = """{
+  "mappings": {
+    "properties": {
+      "temp":    { "type": "float" },  
+      "hum":  { "type": "float"  }, 
+      "timestamp":   { "type": "date"  }     
+    }
+  }
+}"""
+
 working_directory = os.path.dirname(os.path.abspath(__file__))
 
 
@@ -50,12 +60,23 @@ def initialize():
     return es
 
 
+def prepareIndex(index, mapping):
+    elastic.create(index=index, body=mapping)
+
+
+def checkIndexExists(index):
+    return elastic.indices.exists(index)
+
+
 def saveEnv(temp, hum):
     try:
         today = datetime.datetime.today()
         date_index = today.strftime('%d-%m-%Y')
         timestamp = today.isoformat()
-        elastic.index(index=ENV_INDEX.format(date_index), body={"temp": temp, "hum": hum, "timestamp": timestamp})
+        index_name = ENV_INDEX.format(date_index)
+        if not checkIndexExists(index_name):
+            prepareIndex(index_name, ENV_MAPPING)
+        elastic.index(index=index_name, body={"temp": temp, "hum": hum, "timestamp": timestamp})
     except Exception as e:
         logging.error(str(e))
 
@@ -65,7 +86,8 @@ def saveEvent(control, type, msg):
         today = datetime.datetime.today()
         date_index = today.strftime('%d-%m-%Y')
         timestamp = today.isoformat()
-        elastic.index(index=EVENT_INDEX.format(date_index),
+        index_name = EVENT_INDEX.format(date_index)
+        elastic.index(index=index_name,
                       body={"control": control, "type": type, "msg": msg, "timestamp": timestamp})
     except Exception as e:
         logging.error(str(e))
