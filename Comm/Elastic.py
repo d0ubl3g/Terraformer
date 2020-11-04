@@ -1,8 +1,7 @@
-import configparser
 import datetime
+import json
 import logging
 import os
-import json
 
 from colorama import Style, Fore
 from elasticsearch import Elasticsearch
