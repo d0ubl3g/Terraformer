@@ -16,13 +16,13 @@ if Configuration.ELASTIC:
     from Comm import Elastic
 
 init()
-logging.basicConfig(format='%(asctime)s %(levelname)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p',
-                    filename='terraformer.log', level=logging.DEBUG, filemode='w')
+logging.basicConfig(format='%(asctime)s %(levelname)s %(message)s', datefmt='%d/%m/%Y %I:%M:%S %p',
+                    filename='terraformer.log', level=logging.DEBUG, filemode='a')
 logging.getLogger('schedule').setLevel(logging.WARNING)
 
 parser = argparse.ArgumentParser()
-parser.add_argument("-N", "--night", help="Start in Night mode", action="store_true")
-parser.add_argument("-R", "--receiver", help="RF Code Receiver mode", action="store_true")
+parser.add_argument("-N", "--night", help="Start in Night mode.", action="store_true")
+parser.add_argument("-R", "--receiver", help="RF Code Receiver mode.", action="store_true")
 parser.add_argument("-D", "--daemon", help="Run in daemon mode. No Interactive console.", action="store_true")
 args = parser.parse_args()
 

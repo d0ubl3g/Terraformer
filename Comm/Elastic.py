@@ -56,7 +56,7 @@ def initialize():
     except Exception as e:
         es = ""
         print(Style.BRIGHT + Fore.RED + "Error connecting with " + ENDPOINT)
-        logging.error(str(e))
+        logging.error(e)
     return es
 
 
@@ -78,7 +78,7 @@ def saveEnv(temp, hum):
             prepareIndex(index_name, ENV_MAPPING)
         elastic.index(index=index_name, body={"temp": temp, "hum": hum, "timestamp": timestamp})
     except Exception as e:
-        logging.error(str(e))
+        logging.error(e)
 
 
 def saveEvent(control, type, msg):
@@ -90,7 +90,7 @@ def saveEvent(control, type, msg):
         elastic.index(index=index_name,
                       body={"control": control, "type": type, "msg": msg, "timestamp": timestamp})
     except Exception as e:
-        logging.error(str(e))
+        logging.error(e)
 
 
 elastic = initialize()

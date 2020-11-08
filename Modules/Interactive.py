@@ -92,7 +92,7 @@ def printStatus():
         print(Style.BRIGHT + Fore.LIGHTBLUE_EX)
         print("-------------- GROW ENVIRONMENT STATUS --------------")
         print()
-        print("\t" + datetime.datetime.today().strftime('%d-%m-%Y %H:%M:%S'))
+        print("\t\t" + datetime.datetime.today().strftime('%d-%m-%Y %H:%M:%S'))
         print()
         print("\t Temperature: " + tempToColor(
             Receiver.TEMP) + Style.BRIGHT + Fore.LIGHTBLUE_EX + "ºC \t Humidity: " + humToColor(
@@ -167,23 +167,26 @@ def printLog():
 
 
 def execute(option):
-    switcher = {
-        "help": printMenu,
-        "status": printStatus,
-        "extraction start": extractionStart,
-        "extraction stop": extractionStop,
-        "extraction auto start": extractionAutoStart,
-        "extraction auto stop": extractionAutoStop,
-        "illumination start": illuminationStart,
-        "illumination stop": illuminationStop,
-        "ventilation start": ventilationStart,
-        "ventilation stop": ventilationStop,
-        "ventilation auto start": ventilationAutoStart,
-        "ventilation auto stop": ventilationAutoStop,
-        "log": printLog
-    }
-    func = switcher.get(option)
-    func()
+    try:
+        switcher = {
+            "help": printMenu,
+            "status": printStatus,
+            "extraction start": extractionStart,
+            "extraction stop": extractionStop,
+            "extraction auto start": extractionAutoStart,
+            "extraction auto stop": extractionAutoStop,
+            "illumination start": illuminationStart,
+            "illumination stop": illuminationStop,
+            "ventilation start": ventilationStart,
+            "ventilation stop": ventilationStop,
+            "ventilation auto start": ventilationAutoStart,
+            "ventilation auto stop": ventilationAutoStop,
+            "log": printLog
+        }
+        func = switcher.get(option)
+        func()
+    except Exception as e:
+        logging.error(e)
 
 
 def start():

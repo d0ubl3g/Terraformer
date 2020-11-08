@@ -31,7 +31,7 @@ def getCPUTemp():
         cpuTemp = p[p.index('=') + 1:p.rindex("'")]
     except Exception as e:
         cpuTemp = 0.0
-        logging.error("Error obtaining CPU Temp. \n" + str(e))
+        logging.error("Error obtaining CPU Temp. \n" + e)
     return float(cpuTemp)
 
 
