@@ -51,22 +51,20 @@ def cycleOFF():
 
 def turnON():
     global VENTILATION_ON
-    if not VENTILATION_ON:
-        RCTransmitter.sendCommand(RCTransmitter.VENTILATION_ON)
-        VENTILATION_ON = True
-        logging.info("Ventilation turned on.")
-        if Configuration.ELASTIC:
-            Elastic.saveEvent("Ventilation", "On", "Ventilation turned on.")
+    RCTransmitter.sendCommand(RCTransmitter.VENTILATION_ON)
+    VENTILATION_ON = True
+    logging.info("Ventilation turned on.")
+    if Configuration.ELASTIC:
+        Elastic.saveEvent("Ventilation", "On", "Ventilation turned on.")
 
 
 def turnOFF():
     global VENTILATION_ON
-    if VENTILATION_ON:
-        RCTransmitter.sendCommand(RCTransmitter.VENTILATION_OFF)
-        VENTILATION_ON = False
-        logging.info("Ventilation turned off.")
-        if Configuration.ELASTIC:
-            Elastic.saveEvent("Ventilation", "Off", "Ventilation turned off.")
+    RCTransmitter.sendCommand(RCTransmitter.VENTILATION_OFF)
+    VENTILATION_ON = False
+    logging.info("Ventilation turned off.")
+    if Configuration.ELASTIC:
+        Elastic.saveEvent("Ventilation", "Off", "Ventilation turned off.")
 
 
 def autoAdjust():
