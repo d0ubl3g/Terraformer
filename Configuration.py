@@ -57,9 +57,24 @@ VENT_AUTO_FREQ = int(ventilation['AutoFreq'])
 VENT_CYCLE_EVERY = int(ventilation['CycleEvery'])
 VENT_CYCLE_DURATION = int(ventilation['CycleDuration'])
 
-# CO2 #
-co2 = config['CO2']
-CO2_MODE = co2['Mode']
+# IRRIGATION #
+irrigation = config['IRRIGATION']
+IRRI_ENABLED = irrigation.getboolean('')
+IRRI_CYCLE_EVERY = int(irrigation['CycleEvery'])
+IRRI_CYCLE_DURATION = int(irrigation['CycleDuration'])
+
+# CODES #
+codes = config['CODES']
+GPIO_PIN = int(codes['GPIO_PIN'])
+PULSE_LENGTH = int(codes['PULSE_LENGTH'])
+ILLUMINATION_ON = codes['Illumination_ON']
+ILLUMINATION_OFF = codes['Illumination_OFF']
+EXTRACTION_ON = codes['Extraction_ON']
+EXTRACTION_OFF = codes['Extraction_OFF']
+VENTILATION_ON = codes['Ventilation_ON']
+VENTILATION_OFF = codes['Ventilation_OFF']
+IRRIGATION_ON = codes['Irrigation_ON']
+IRRIGATION_OFF = codes['Irrigation_OFF']
 
 # DYNAMIC CONF #
 DAY = True
