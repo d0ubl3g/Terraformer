@@ -18,7 +18,7 @@ AUTO_SCHEDULED = True
 
 def scheduleAuto():
     schedule.every(Configuration.VENT_AUTO_FREQ).seconds.do(autoAdjust).tag('ventilation-auto')
-    scheduleCycle(Configuration.VENT_CYCLE_EVERY, Configuration.VENT_CYCLE_DURATION)
+    scheduleCycle(Configuration.VENT_CYCLE_EVERY)
     logging.info("Auto Ventilation scheduled every " + str(Configuration.VENT_AUTO_FREQ) + " seconds.")
     logging.info("Ventilation cycles scheduled every " + str(Configuration.VENT_CYCLE_EVERY) + " seconds for " +
                  str(Configuration.VENT_CYCLE_DURATION) + " seconds.")
@@ -29,7 +29,7 @@ def reScheduleAuto():
         schedule.every(Configuration.VENT_AUTO_FREQ).seconds.do(autoAdjust).tag('ventilation-auto')
 
 
-def scheduleCycle(e, d):
+def scheduleCycle(e):
     schedule.every(e).seconds.do(cycleON).tag('ventilation-cycle')
 
 

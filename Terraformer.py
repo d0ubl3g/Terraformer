@@ -7,7 +7,7 @@ import schedule
 from colorama import init, Fore, Style
 
 import Configuration
-from Control import Illumination, Extraction, Ventilation
+from Control import Illumination, Extraction, Ventilation, Irrigation
 from Modules import Banner, Interactive
 from Sensors import Receiver
 from System import Cooling
@@ -60,6 +60,8 @@ if Configuration.CONFIGURATION_SET:
         logging.error("[NOT IMPLEMENTED] Vent Schedule Cycle")
     if not args.daemon:
         threading.Thread(target=Interactive.start).start()
+    if Configuration.IRRI_ENABLED:
+        Irrigation.scheduleAuto()
     while True:
         schedule.run_pending()
         time.sleep(1)
