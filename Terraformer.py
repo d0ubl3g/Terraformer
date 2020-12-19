@@ -30,6 +30,7 @@ Banner.printBanner()
 print(Style.BRIGHT + Fore.BLUE + "Terraformer starting..." + Style.RESET_ALL)
 logging.info("Loading configuration...")
 Configuration.initializeDynamicConf()
+
 if args.night:
     Configuration.DAY = False
 if Configuration.CONFIGURATION_SET:
@@ -42,26 +43,35 @@ if Configuration.CONFIGURATION_SET:
         logging.info("Flowering phase configured.")
     elif Configuration.ENV_PHASE == "dry":
         logging.info("Dry phase configured.")
+
     logging.info("Initializing System Cooling...")
     Cooling.scheduleAuto()
+
     logging.info("Initializing Sensors...")
     Receiver.scheduleAuto()
-    logging.info("Initializing Illumination...")
-    Illumination.scheduleHours()
+
+    if Configuration.ENV_PHASE != "dry":
+        logging.info("Initializing Illumination...")
+        Illumination.scheduleHours()
+
     logging.info("Initializing Extraction...")
     if Configuration.EXT_MODE == "auto":
         Extraction.scheduleAuto()
     else:
         logging.error("[NOT IMPLEMENTED] Ext Schedule Cycle")
+
     logging.info("Initializing Ventilation...")
     if Configuration.VENT_MODE == "auto":
         Ventilation.scheduleAuto()
     else:
         logging.error("[NOT IMPLEMENTED] Vent Schedule Cycle")
+
+    if Configuration.IRRI_ENABLED:
+        logging.info("Initializing Irrigation...")
+        Irrigation.scheduleAuto()
+
     if not args.daemon:
         threading.Thread(target=Interactive.start).start()
-    if Configuration.IRRI_ENABLED:
-        Irrigation.scheduleAuto()
     while True:
         schedule.run_pending()
         time.sleep(1)
