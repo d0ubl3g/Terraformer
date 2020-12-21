@@ -5,7 +5,6 @@ import schedule
 
 import Configuration
 from Comm import RCTransmitter
-from Sensors import Receiver
 
 if Configuration.ELASTIC:
     from Comm import Elastic

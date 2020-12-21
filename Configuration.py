@@ -59,7 +59,7 @@ VENT_CYCLE_DURATION = int(ventilation['CycleDuration'])
 
 # IRRIGATION #
 irrigation = config['IRRIGATION']
-IRRI_ENABLED = irrigation.getboolean('')
+IRRI_ENABLED = irrigation.getboolean('Enabled')
 IRRI_CYCLE_EVERY = int(irrigation['CycleEvery'])
 IRRI_CYCLE_DURATION = int(irrigation['CycleDuration'])
 
